@@ -23,7 +23,8 @@ abstract class BaseRepository {
      * List as options for display. Result can be dropped as is into a form select.
      */
     function listOptions() {
-        $data = UserType::where('user_type_active', '=', true)->get()->toArray();
+        $model = new $this->modelName();
+        $data = $model->where('user_type_active', '=', true)->get()->toArray();
 
         $result = [];
         foreach($data as $type) {
@@ -40,6 +41,6 @@ abstract class BaseRepository {
      * @return mixed
      */
     public function __call($name, $arguments) {
-        return call_user_func_array(array($this->modelName . '::', $name), $arguments);
+        return call_user_func_array(array($this->modelName, $name), $arguments);
     }
 } 

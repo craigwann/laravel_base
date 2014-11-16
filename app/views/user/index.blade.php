@@ -1,7 +1,14 @@
 @extends('layouts.default')
 
 @section('content')
-    @foreach ($users as $user)
-            <p>This is user {{ $user->id }}</p>
-    @endforeach
+    <table class="table table-hover table-striped">
+      @foreach ($users as $user)
+        <tr @if (!$user->user_active) class="danger" @endif >
+            <td>{{ $user->user_first_name }}</td>
+            <td>{{ $user->user_last_name }}</td>
+            <td>{{ $user->email }}</td>
+            <td>{{ $user->user_username }}</td>
+        </tr>
+      @endforeach
+    </table>
 @stop
