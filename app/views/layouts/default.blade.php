@@ -53,7 +53,9 @@
 
 @include('elements.menu')
 
-@yield('content');
+<div class="container main">
+    @yield('content');
+</div>
 
 @include('elements.footer')
 

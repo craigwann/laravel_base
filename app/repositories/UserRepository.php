@@ -7,6 +7,7 @@
  */
 
 class UserRepository extends BaseRepository {
+    protected $modelName = 'User';
 
     function store($input) {
             //Handle password
@@ -22,7 +23,8 @@ class UserRepository extends BaseRepository {
                 )
             );
             if ($validator->fails()) {
-                return $validator->errors();
+                $this->setError($validator->errors());
+                return false;
             }
 
             $hash = Hash::make($input['password']);
@@ -32,13 +34,15 @@ class UserRepository extends BaseRepository {
             $user = new User();
             $user->user_first_name = $input['user_first_name'];
             $user->user_last_name = $input['user_last_name'];
-            $user->user_email = $input['user_email'];
+            $user->user_username = $input['user_username'];
+            $user->email = $input['email'];
             $user->user_type_id = $input['user_type_id'];
             $user->user_type_id = $input['user_active'];
             $user->password = $hash;
             $result = $user->save();
             if (!$result) {
-                return $this->setError($user->errors());
+                $this->setError($user->errors());
             }
+            return $result;
         }
 } 

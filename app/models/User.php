@@ -12,7 +12,8 @@ class User extends Ardent implements UserInterface, RemindableInterface {
         'user_last_name'        => 'required',
         'user_type_id'          => 'required',
         'password'              => 'required',
-        'user_email' => 'required|email'
+        'email' => 'required|email|unique:user',
+        'user_username' => 'required|unique:user'
     );
     protected $guarded = array('id', 'password');
 

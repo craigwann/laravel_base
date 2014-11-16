@@ -12,7 +12,8 @@
                    {{ BootForm::open()->attribute('class', 'col-sm-8 col-sm-offset-2')->action('/user')}}
                         {{ BootForm::text('First Name', 'user_first_name')->placeholder('First Name') }}
                         {{ BootForm::text('Last Name', 'user_last_name')->placeholder('Last Name') }}
-                        {{ BootForm::email('Email', 'user_email')->placeholder('Email') }}
+                        {{ BootForm::email('Email', 'email')->placeholder('Email') }}
+                        {{ BootForm::text('Username', 'user_username')->placeholder('Username') }}
                         {{ BootForm::select('Type', 'user_type_id')->options(array_merge(['' =>  'Choose User Type...'], $user_type_options))->select('') }}
                         {{ BootForm::password('Password', 'password')->placeholder('Password') }}
                         {{ BootForm::password('Confirm Password', 'password_confirmation')->placeholder('Confirm Password') }}
