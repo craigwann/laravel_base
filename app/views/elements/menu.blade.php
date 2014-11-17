@@ -1,3 +1,6 @@
+<!--=== PAGE PRELOADER ===-->
+<div id="page-loader"><span class="page-loader-gif">Loading...</span></div>
+
 <div id="main-nav" class="navbar">
     <div class="container">
 

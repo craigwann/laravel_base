@@ -7,9 +7,7 @@
 
 @include('elements.menu')
 
-<div class="container main">
-    @yield('content');
-</div>
+@yield('content');
 
 @include('elements.footer')
 

@@ -11,5 +11,6 @@ class UserType extends Ardent {
 	 */
 	protected $table = 'user_type';
     public $timestamps = false;
+    protected $primaryKey = 'user_type_id';
 
 }
