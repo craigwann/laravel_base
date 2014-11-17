@@ -56,8 +56,8 @@ class UserController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
-	}
+        return Redirect::to('/user/' . $id . '/edit');
+    }
 
 
 	/**
@@ -68,7 +68,14 @@ class UserController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$user = $this->user->find($id);
+        if (!$user) {
+            return $this->message('No user found', $this->not_found_message);
+        }
+        $data = $user->userType()->get();
+
+        $data['user_type_options'] = $this->userType->listOptions();
+        return View::make('user.edit', $data)->with('user', $user);
 	}
 
 

@@ -7,6 +7,6 @@
  */
 
 class UserTypeRepository extends BaseRepository {
-
+    protected $modelName = 'UserType';
 
 } 

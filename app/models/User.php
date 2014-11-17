@@ -16,6 +16,7 @@ class User extends Ardent implements UserInterface, RemindableInterface {
         'user_username' => 'required|unique:user'
     );
     protected $guarded = array('id', 'password');
+    protected $primaryKey = 'user_id';
 
 	use UserTrait, RemindableTrait;
 
@@ -33,8 +34,8 @@ class User extends Ardent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
 
-    public function user_type() {
-        $this->hasOne('user_type_id');
+    public function userType() {
+        return $this->hasOne('UserType', 'user_type_id', 'user_type_id');
     }
 
 }
