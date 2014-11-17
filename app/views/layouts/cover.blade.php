@@ -25,6 +25,7 @@
     {{ Minify::stylesheetDir('/css/font-awesome/') }}
     {{ Minify::stylesheetDir('/css/flexslider/') }}
     {{ Minify::stylesheetDir('/css/quatro/') }}
+    {{ Minify::stylesheetDir('/css/base/') }}
     {{ Minify::stylesheetDir('/css/form/') }}
 
     <!-- ==============================================

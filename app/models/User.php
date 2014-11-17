@@ -33,4 +33,8 @@ class User extends Ardent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
 
+    public function user_type() {
+        $this->hasOne('user_type_id');
+    }
+
 }
