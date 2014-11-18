@@ -8,7 +8,13 @@
 @include('elements.menu')
 
 <div class="container main">
-    @yield('content');
+    @if(Session::has('message'))
+    <div @if(Session::has('context')) class="alert alert-{{ Session::get('context') }}" @else class="alert" @endif role="alert">
+      {{ Session::get('message') }}
+    </div>
+    @endif
+
+    @yield('content')
 </div>
 
 @include('elements.footer')

@@ -7,6 +7,7 @@ class UserController extends \BaseController {
     function __construct(UserRepository $userRepository, UserTypeRepository $userTypeRepository) {
         $this->user = $userRepository;
         $this->userType = $userTypeRepository;
+        //$this->beforeFilter('auth', array('except' => array('index', 'show')));
     }
 
 	/**
@@ -16,7 +17,7 @@ class UserController extends \BaseController {
 	 */
 	public function index()
 	{
-		$users = $this->user->index();
+		$users = $this->user->index(15);
         return View::make('user.index', array('users' => $users));
 	}
 
@@ -43,7 +44,7 @@ class UserController extends \BaseController {
         if (!$result) {
             return Redirect::route('user.create')->withInput()->withErrors($this->user->errors());
         } else {
-            return Redirect::route('user.index')->with('message', 'User created!');
+            return Redirect::route('user.index')->with('message', 'User created!')->with('context', 'success');
         }
 	}
 
@@ -87,19 +88,29 @@ class UserController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+        $result = $this->user->update($id, Input::all());
+        if (!$result) {
+            return Redirect::route('user.edit', array($id))->withInput()->withErrors($this->user->errors());
+        } else {
+            return Redirect::route('user.index')->with('message', 'User updated!')->with('context', 'success');
+        }
 	}
 
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Employ a soft delete by setting the user as inactive.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function destroy($id)
 	{
-		//
+        $result = $this->user->updateActive($id, false);
+        if (!$result) {
+            return Redirect::route('user.edit', array($id))->with('danger', 'Error deactivating user.!')->with('context', 'danger');
+        } else {
+            return Redirect::route('user.index')->with('message', 'User deactivated!')->with('context', 'success');
+        }
 	}
 
 

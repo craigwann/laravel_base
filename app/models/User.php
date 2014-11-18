@@ -38,4 +38,10 @@ class User extends Ardent implements UserInterface, RemindableInterface {
         return $this->hasOne('UserType', 'user_type_id', 'user_type_id');
     }
 
+    public function isAdmin() {
+
+    }
+
+
+
 }
