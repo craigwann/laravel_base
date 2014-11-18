@@ -21,4 +21,7 @@
             </tr>
         @endforeach
     </table>
+    <div class="text-center">
+        <?php echo $users->links(); ?>
+    </div>
 @stop
