@@ -10,3 +10,7 @@
     background-color: #F75443;
     border-color: #F75443;
 }
+
+.no_bottom {
+    margin-bottom: 0px;
+}

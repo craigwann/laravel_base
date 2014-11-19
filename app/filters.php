@@ -48,6 +48,31 @@ Route::filter('auth', function()
 	}
 });
 
+Route::filter('access', function($accessName)
+{
+    if (Auth::guest())
+    {
+        if (Request::ajax())
+        {
+            return Response::make('Unauthorized', 401);
+        }
+        else
+        {
+            return Redirect::guest('login');
+        }
+    }
+    $types = UserType::where('active', '=', true)->remember(15)->get();
+    $accessId = 99999;
+    foreach($types as $type) {
+        if ($type['name'] == $accessName) {
+            $accessId = $type['id'];
+        }
+    }
+    if (Auth::user()->userType->id < $accessId) {
+        return Redirect::route('denied');
+    };
+});
+
 Route::filter('auth.basic', function()
 {
 	return Auth::basic();

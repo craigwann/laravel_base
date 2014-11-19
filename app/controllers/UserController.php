@@ -7,7 +7,7 @@ class UserController extends \BaseController {
     function __construct(UserRepository $userRepository, UserTypeRepository $userTypeRepository) {
         $this->user = $userRepository;
         $this->userType = $userTypeRepository;
-        //$this->beforeFilter('auth', array('except' => array('index', 'show')));
+        //$this->beforeFilter('access:Admin');
     }
 
 	/**
@@ -113,5 +113,41 @@ class UserController extends \BaseController {
         }
 	}
 
+    function login() {
+        return View::make('user.login');
+    }
 
+    function processLogin() {
+        $rules = array(
+            'username' => 'required',
+            'password' => 'required|between:4,16|alpha_num'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('login')
+                ->withErrors($validator)
+                ->withInput(Input::except('password'));
+        }
+
+        $userData = array(
+            'password' 	=> Input::get('password'),
+            'active' => true
+        );
+
+        if (str_contains(Input::get('username'), '@') &&
+            str_contains(Input::get('username'), '.')) {
+            //Logging in with email instead of username
+            $userData['email'] = Input::get('username');
+        } else {
+            $userData['username'] = Input::get('username');
+        }
+
+        if (Auth::attempt($userData)) {
+            return Redirect::to('/');
+        } else {
+            return Redirect::route('login')->with('message', 'Incorrect username or password.')->with('context', 'danger');
+        }
+    }
 }

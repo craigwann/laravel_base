@@ -87,18 +87,19 @@ class UserRepository extends BaseRepository {
     }
 
     function buildPayload($user, $input) {
-        $user->user_first_name = $input['user_first_name'];
-        $user->user_last_name = $input['user_last_name'];
-        $user->user_username = $input['user_username'];
+        $user->first_name = $input['first_name'];
+        $user->last_name = $input['last_name'];
+        $user->username = $input['username'];
         $user->email = $input['email'];
         $user->user_type_id = $input['user_type_id'];
-        $user->user_active = $input['user_active'];
+        $user->active = $input['active'];
         return $user;
     }
 
     function index($paginate = 0) {
-        $user = DB::table('user')
-            ->leftJoin('user_type', 'user.user_type_id', '=', 'user_type.user_type_id');
+        $user = DB::table('users')
+            ->select('users.id', 'users.active', 'users.first_name', 'users.last_name', 'users.email', 'users.username', 'user_types.name as user_type_name', 'user_types.id as user_type_id')
+            ->leftJoin('user_types', 'users.user_type_id', '=', 'user_types.id');
         if ($paginate) {
             return $user->paginate($paginate);
         }

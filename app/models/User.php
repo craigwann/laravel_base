@@ -8,24 +8,16 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 
 class User extends Ardent implements UserInterface, RemindableInterface {
     public static $rules = array(
-        'user_first_name'       => 'required',
-        'user_last_name'        => 'required',
+        'first_name'       => 'required',
+        'last_name'        => 'required',
         'user_type_id'          => 'required',
         'password'              => 'required',
-        'email' => 'required|email|unique:user',
-        'user_username' => 'required|unique:user'
+        'email' => 'required|email|unique:users',
+        'username' => 'required|unique:users|alpha_dash'
     );
     protected $guarded = array('id', 'password');
-    protected $primaryKey = 'user_id';
 
 	use UserTrait, RemindableTrait;
-
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'user';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -35,7 +27,7 @@ class User extends Ardent implements UserInterface, RemindableInterface {
 	protected $hidden = array('password', 'remember_token');
 
     public function userType() {
-        return $this->hasOne('UserType', 'user_type_id', 'user_type_id');
+        return $this->hasOne('UserType', 'id', 'user_type_id');
     }
 
     public function isAdmin() {

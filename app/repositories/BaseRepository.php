@@ -20,20 +20,6 @@ abstract class BaseRepository {
     }
 
     /**
-     * List as options for display. Result can be dropped as is into a form select.
-     */
-    function listOptions() {
-        $model = new $this->modelName();
-        $data = $model->where('user_type_active', '=', true)->get()->toArray();
-
-        $result = [];
-        foreach($data as $type) {
-            $result[$type['user_type_id']] = $type['user_type_name'];
-        }
-        return $result;
-    }
-
-    /**
      * Method overload to model.
      *
      * @param $name
