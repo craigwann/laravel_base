@@ -11,13 +11,13 @@
             <th></th>
         </tr>
         @foreach ($users as $user)
-            <tr @if (!$user->user_active) class="danger rowlink" @else class="rowlink" @endif data-link="row">
-                <td>{{ $user->user_first_name }} {{ $user->user_last_name }}</td>
+            <tr @if (!$user->active) class="danger rowlink" @else class="rowlink" @endif data-link="row">
+                <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{{ $user->user_username }}</td>
+                <td>{{ $user->username }}</td>
                 <td>{{ $user->user_type_name }}</td>
                 <td></td>
-                <td><a href="{{ URL::action('UserController@edit', array($user->user_id)) }}"></a><i class="fa fa-edit"></i></td>
+                <td><a href="{{ URL::action('UserController@edit', array($user->id)) }}"></a><i class="fa fa-edit"></i></td>
             </tr>
         @endforeach
     </table>

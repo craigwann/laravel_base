@@ -13,6 +13,13 @@
 
 Route::get('/', 'HomeController@show');
 
-Route::get('/login', 'UserController@login');
+Route::get('/login', array('as' => 'login', 'uses' => 'UserController@login'));
+Route::post('/login', 'UserController@processLogin');
 Route::get('/logout', 'UserController@logout');
+
 Route::resource('user', 'UserController');
+
+Route::get('/denied', array('as' => 'denied', function()
+{
+    return View::make('denied');
+}));
