@@ -15,10 +15,9 @@
 
             <ul class="slides">
 
-                <li><h1 class="bordered-text">Welcome to <span class="primary">Quattro</span> Studio</h1></li>
-                <li><h1 class="bordered-text">We are <span class="primary">Young</span></h1></li>
-                <li><h1 class="bordered-text">We are <span class="primary">Passionate</span></h1></li>
-                <li><h1 class="bordered-text">We have <span class="primary">Fresh</span> Ideas</h1></li>
+                <li><h1 class="bordered-text">A <span class="primary">Tabletop</span> RPG</h1></li>
+                <li><h1 class="bordered-text">Where <span class="primary">Real Life</span></h1></li>
+                <li><h1 class="bordered-text">Has <span class="primary">In Game</span> Consequences</h1></li>
 
             </ul>
 
