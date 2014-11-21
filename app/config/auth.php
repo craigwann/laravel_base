@@ -68,4 +68,27 @@ return array(
 
 	),
 
+    /*
+	|--------------------------------------------------------------------------
+	| User Type
+	|--------------------------------------------------------------------------
+	|
+    | An array of user types to use a short cut to get user type ID's to pass to the User::access() function.
+    | This array should mirror the entries in the user_types table.
+	|
+	*/
+
+    'userType' => array(
+
+        'admin' => 1,
+
+        'manager' => 2,
+
+        'moderator' => 3,
+
+        'gameMaster' => 4,
+
+        'player' => 5
+    )
+
 );

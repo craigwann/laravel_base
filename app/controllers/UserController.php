@@ -7,7 +7,7 @@ class UserController extends \BaseController {
     function __construct(UserRepository $userRepository, UserTypeRepository $userTypeRepository) {
         $this->user = $userRepository;
         $this->userType = $userTypeRepository;
-        //$this->beforeFilter('access:Admin');
+        $this->beforeFilter('access:' . Config::get('auth.userType.manager'), array('except' => array('login', 'processLogin')));
     }
 
 	/**

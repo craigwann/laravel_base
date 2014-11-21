@@ -17,9 +17,22 @@ Route::get('/login', array('as' => 'login', 'uses' => 'UserController@login'));
 Route::post('/login', 'UserController@processLogin');
 Route::get('/logout', 'UserController@logout');
 
-Route::resource('user', 'UserController');
+Route::resource('users', 'UserController');
 
 Route::get('/denied', array('as' => 'denied', function()
 {
     return View::make('denied');
 }));
+
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::get('api/v1/users', 'UserApiController@index');
+Route::get('api/v1/users/{id}', 'UserApiController@show');
+Route::post('api/v1/users/{id}', 'UserApiController@authenticate');
+Route::get('api/v1/users/{id}', 'UserApiController@getUserDetails');
+Route::put('api/v1/users/{id}', 'UserApiController@deauthenticate');
