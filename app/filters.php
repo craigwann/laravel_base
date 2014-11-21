@@ -48,7 +48,7 @@ Route::filter('auth', function()
 	}
 });
 
-Route::filter('access', function($accessName)
+Route::filter('access', function($route, $request, $accessId)
 {
     if (Auth::guest())
     {
@@ -61,14 +61,8 @@ Route::filter('access', function($accessName)
             return Redirect::guest('login');
         }
     }
-    $types = UserType::where('active', '=', true)->remember(15)->get();
-    $accessId = 99999;
-    foreach($types as $type) {
-        if ($type['name'] == $accessName) {
-            $accessId = $type['id'];
-        }
-    }
-    if (Auth::user()->userType->id < $accessId) {
+
+    if (Auth::user()->userType->id > intval($accessId)) {
         return Redirect::route('denied');
     };
 });

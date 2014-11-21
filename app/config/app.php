@@ -123,7 +123,9 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         'AdamWathan\BootForms\BootFormsServiceProvider',
         'CeesVanEgmond\Minify\MinifyServiceProvider',
-        '\RepositoryServiceProvider'
+        '\RepositoryServiceProvider',
+        'EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider',
+        'Chrisbjr\ApiGuard\ApiGuardServiceProvider',
 	),
 
 	/*
