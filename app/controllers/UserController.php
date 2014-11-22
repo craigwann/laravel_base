@@ -73,11 +73,12 @@ class UserController extends \BaseController {
         if (!$user) {
             return $this->message('No user found', $this->not_found_message);
         }
-        $data = $user->with('userType')->with('apiKey')->get();
+        $data = $user->with('userType')->first();
+        $apiKey = $user->apiKey()->first();
 
         $data['user_type_options'] = $this->userType->listOptions();
 
-        return View::make('user.edit', $data)->with('user', $user);
+        return View::make('user.edit', $data)->with('user', $user)->with('apiKey', $apiKey);
 	}
 
 

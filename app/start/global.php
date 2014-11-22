@@ -79,3 +79,12 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+Auth::extend('ironQuestAuth', function()
+{
+    $hasher = App::make('hash');
+    return new ironQuestGuard(
+        new Illuminate\Auth\EloquentUserProvider($hasher, 'user'),
+        App::make('session.store')
+    );
+});
