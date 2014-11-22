@@ -1,5 +1,9 @@
 @extends('layouts.default')
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('users') }}
+@stop
+
 @section('content')
     <table class="table table-hover table-striped">
         <tr>

@@ -42,9 +42,9 @@ class UserController extends \BaseController {
 	{
 		$result = $this->user->store(Input::all());
         if (!$result) {
-            return Redirect::route('user.create')->withInput()->withErrors($this->user->errors());
+            return Redirect::route('users.create')->withInput()->withErrors($this->user->errors());
         } else {
-            return Redirect::route('user.index')->with('message', 'User created!')->with('context', 'success');
+            return Redirect::route('users.index')->with('message', 'User created!')->with('context', 'success');
         }
 	}
 
@@ -73,9 +73,10 @@ class UserController extends \BaseController {
         if (!$user) {
             return $this->message('No user found', $this->not_found_message);
         }
-        $data = $user->userType()->get();
+        $data = $user->with('userType')->with('apiKey')->get();
 
         $data['user_type_options'] = $this->userType->listOptions();
+
         return View::make('user.edit', $data)->with('user', $user);
 	}
 
@@ -90,9 +91,9 @@ class UserController extends \BaseController {
 	{
         $result = $this->user->update($id, Input::all());
         if (!$result) {
-            return Redirect::route('user.edit', array($id))->withInput()->withErrors($this->user->errors());
+            return Redirect::route('users.edit', array($id))->withInput()->withErrors($this->user->errors());
         } else {
-            return Redirect::route('user.index')->with('message', 'User updated!')->with('context', 'success');
+            return Redirect::route('users.index')->with('message', 'User updated!')->with('context', 'success');
         }
 	}
 
@@ -107,9 +108,9 @@ class UserController extends \BaseController {
 	{
         $result = $this->user->updateActive($id, false);
         if (!$result) {
-            return Redirect::route('user.edit', array($id))->with('danger', 'Error deactivating user.!')->with('context', 'danger');
+            return Redirect::route('users.edit', array($id))->with('danger', 'Error deactivating user.!')->with('context', 'danger');
         } else {
-            return Redirect::route('user.index')->with('message', 'User deactivated!')->with('context', 'success');
+            return Redirect::route('users.index')->with('message', 'User deactivated!')->with('context', 'success');
         }
 	}
 

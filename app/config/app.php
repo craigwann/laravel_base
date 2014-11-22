@@ -126,6 +126,7 @@ return array(
         '\RepositoryServiceProvider',
         'EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider',
         'Chrisbjr\ApiGuard\ApiGuardServiceProvider',
+        'DaveJamesMiller\Breadcrumbs\ServiceProvider',
 	),
 
 	/*
@@ -192,7 +193,8 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
-        'BootForm'          => 'AdamWathan\BootForms\Facades\BootForm'
+        'BootForm'          => 'AdamWathan\BootForms\Facades\BootForm',
+        'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
 	),
 
 );

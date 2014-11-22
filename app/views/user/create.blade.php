@@ -9,7 +9,7 @@
 
                 <div class="row">
 
-                   {{ BootForm::open()->attribute('class', 'col-sm-8 col-sm-offset-2')->action('/user')}}
+                   {{ BootForm::open()->attribute('class', 'col-sm-8 col-sm-offset-2')->action('/users')}}
                     @include('user.form')
 
                         <p class="text-center">
