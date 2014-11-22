@@ -7,6 +7,8 @@
 
 @include('elements.menu')
 
+@yield('breadcrumbs')
+
 @if(Session::has('message'))
 <div @if(Session::has('context')) class="alert alert-{{ Session::get('context') }} no_bottom" @else class="alert" @endif role="alert">
   {{ Session::get('message') }}

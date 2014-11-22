@@ -30,6 +30,10 @@ class User extends Ardent implements UserInterface, RemindableInterface {
         return $this->hasOne('UserType', 'id', 'user_type_id');
     }
 
+    public function apiKey() {
+        return $this->hasOne('Chrisbjr\ApiGuard\ApiKey', 'user_id', 'id');
+    }
+
     public function isAdmin() {
 
     }
