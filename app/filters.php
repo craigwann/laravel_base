@@ -62,7 +62,7 @@ Route::filter('access', function($route, $request, $accessId)
         }
     }
 
-    if (Auth::user()->userType->id > intval($accessId)) {
+    if (!Auth::checkAccess($accessId)) {
         return Redirect::route('denied');
     };
 });

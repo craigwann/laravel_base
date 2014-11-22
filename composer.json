@@ -15,6 +15,7 @@
 	"autoload": {
 		"classmap": [
             "app/apiControllers",
+            "app/auth",
 			"app/commands",
 			"app/controllers",
 			"app/models",

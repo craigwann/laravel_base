@@ -62,3 +62,9 @@ form .error-message {
 form.no-placeholder .error-message {
     top:0;
 }
+
+.gray-bg form .form-control {
+    background:white;
+    border-color: #777;
+    color: #000;
+}
