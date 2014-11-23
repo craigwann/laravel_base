@@ -2,7 +2,7 @@
 
 class ironQuestGuard extends Illuminate\Auth\Guard
 {
-  function checkAccess ($accessId) {
-      return ($this->user->userType->id <= intval($accessId));
+  function checkAccess ($level) {
+      return ($this->user->userType->level >= intval($level));
   }
 }

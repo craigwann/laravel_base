@@ -98,16 +98,9 @@ class UserController extends \BaseController {
         }
 	}
 
-
-	/**
-	 * Employ a soft delete by setting the user as inactive.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($id)
 	{
-        $result = $this->user->updateActive($id, false);
+        $result = $this->user->destroy($id);
         if (!$result) {
             return Redirect::route('users.edit', array($id))->with('danger', 'Error deactivating user.!')->with('context', 'danger');
         } else {
@@ -134,8 +127,7 @@ class UserController extends \BaseController {
         }
 
         $userData = array(
-            'password' 	=> Input::get('password'),
-            'active' => true
+            'password' 	=> Input::get('password')
         );
 
         if (str_contains(Input::get('username'), '@') &&

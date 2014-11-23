@@ -48,7 +48,7 @@ Route::filter('auth', function()
 	}
 });
 
-Route::filter('access', function($route, $request, $accessId)
+Route::filter('access', function($route, $request, $level)
 {
     if (Auth::guest())
     {
@@ -62,7 +62,7 @@ Route::filter('access', function($route, $request, $accessId)
         }
     }
 
-    if (!Auth::checkAccess($accessId)) {
+    if (!Auth::checkAccess($level)) {
         return Redirect::route('denied');
     };
 });

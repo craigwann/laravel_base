@@ -1,6 +1,35 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| User Type Levels
+|--------------------------------------------------------------------------
+|
+| Setting the user type levels using constants because we have to reference them in api guard class parameter defaults.
+| To use a short cut to get user type ID's to pass to the User::access() function. These should mirror the entries in the user_types table.
+|
+*/
+
+define('kAdminLevel', 10);
+define('kManagerLevel', 9);
+define('kModeratorLevel', 6);
+define('kGameMasterLevel', 2);
+define('kPlayerLevel', 3);
+
 return array(
+
+    'userType' => array(
+
+        'admin' => kAdminLevel,
+
+        'manager' => kManagerLevel,
+
+        'moderator' => kModeratorLevel,
+
+        'gameMaster' => kGameMasterLevel,
+
+        'player' => kPlayerLevel
+    ),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -67,28 +96,5 @@ return array(
 		'expire' => 60,
 
 	),
-
-    /*
-	|--------------------------------------------------------------------------
-	| User Type
-	|--------------------------------------------------------------------------
-	|
-    | An array of user types to use a short cut to get user type ID's to pass to the User::access() function.
-    | This array should mirror the entries in the user_types table.
-	|
-	*/
-
-    'userType' => array(
-
-        'admin' => 1,
-
-        'manager' => 2,
-
-        'moderator' => 3,
-
-        'gameMaster' => 4,
-
-        'player' => 5
-    )
 
 );
