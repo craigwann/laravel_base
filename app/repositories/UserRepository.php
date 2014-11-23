@@ -77,11 +77,20 @@ class UserRepository extends BaseRepository {
         return $result;
     }
 
-    function updateActive($id, $active) {
+    function destroy($id) {
         $user = User::find($id);
-        $result = $user->updateUniques();
+        $result = $user->delete();
         if (!$result) {
             $this->setError($user->errors());
+            return $result;
+        }
+        $apiKey = Chrisbjr\ApiGuard\ApiKey::where('user_id', '=', $id)->first();
+        if($apiKey) {
+            $api_key_result = $apiKey->delete();
+            if (!$api_key_result) {
+                $this->setError($apiKey->errors());
+                return $api_key_result;
+            }
         }
         return $result;
     }
@@ -92,13 +101,12 @@ class UserRepository extends BaseRepository {
         $user->username = $input['username'];
         $user->email = $input['email'];
         $user->user_type_id = $input['user_type_id'];
-        $user->active = $input['active'];
         return $user;
     }
 
     function index($paginate = 0) {
         $user = DB::table('users')
-            ->select('users.id', 'users.active', 'users.first_name', 'users.last_name', 'users.email', 'users.username', 'user_types.name as user_type_name', 'user_types.id as user_type_id')
+            ->select('users.id', 'users.first_name', 'users.last_name', 'users.email', 'users.username', 'users.deleted_at', 'user_types.name as user_type_name', 'user_types.id as user_type_id')
             ->leftJoin('user_types', 'users.user_type_id', '=', 'user_types.id');
         if ($paginate) {
             return $user->paginate($paginate);

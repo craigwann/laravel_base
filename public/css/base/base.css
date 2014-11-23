@@ -25,3 +25,31 @@
 .no_bottom {
     margin-bottom: 0px;
 }
+
+.title-gear {
+    float: right;
+    font-size: .4em;
+    line-height: 3.5em;
+}
+
+.section-title .popover {
+    font-size: .3em;
+    line-height: 1em;
+}
+
+.popover {
+    color: black;
+}
+
+.modal-dialog {
+    margin-top: 100px;
+}
+
+.btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:focus  {
+    background-color: #F75443;
+    border-color: #c94438;
+}
+
+.btn-primary:hover {
+    background-color: #c94438;
+}

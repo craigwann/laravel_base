@@ -7,7 +7,10 @@
 @section('content')
         <section class="parallax-bg light-typo padding-top-bottom " data-parallax-background="/images/contact-bg.jpg" data-stellar-background-ratio=".1">
 
-            <h1 class="section-title">Edit User</h1>
+            <div class="col-sm-8 col-sm-offset-2">
+                <h1 class="section-title"><span class="title-gear bootbox-html" bootbox-target=".options" bootbox-title="User Options"><i class="fa fa-gear"></i></span>Edit User</h1>
+                <div class="options hide">@include('user.options')</div>
+            </div>
 
             <div class="row">
 
@@ -17,7 +20,7 @@
 
                     <p class="text-center">
                         <button name="submit" type="submit" class="btn btn-quattro" data-error-message="Error!" data-sending-message="Sending..." data-ok-message="Message Sent">
-                            <i class="fa fa-user"></i>
+
                             Save User
                         </button>
                     </p>
@@ -25,11 +28,15 @@
 
             </div>
 
+
         </section>
 
-        @if (Auth::checkAccess(Config::get('auth.userType.admin')))
+        @if ((Auth::checkAccess(Config::get('auth.userType.admin')))
+                && !empty($apiKey->id)
+                && (!$apiKey->deleted_at))
+
             <section class="gray-bg padding-top-bottom">
-                <h2 class="section-title">API Key</h1>
+                <h2 class="section-title">API Key</h2>
 
                 <div class="row">
 

@@ -17,7 +17,7 @@ class User extends Ardent implements UserInterface, RemindableInterface {
     );
     protected $guarded = array('id', 'password');
 
-	use UserTrait, RemindableTrait;
+	use UserTrait, RemindableTrait, SoftDeletingTrait;
 
 	/**
 	 * The attributes excluded from the model's JSON form.

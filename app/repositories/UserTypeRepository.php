@@ -13,7 +13,7 @@ class UserTypeRepository extends BaseRepository {
      * List as options for display. Result can be dropped as is into a form select.
      */
     function listOptions() {
-        $data = UserType::where('active', '=', true)->get()->toArray();
+        $data = UserType::where('active', '=', true)->orderBy('level')->get()->toArray();
         $result = [];
         foreach($data as $type) {
             $result[$type['id']] = $type['name'];

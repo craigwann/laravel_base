@@ -26,4 +26,5 @@ SCRIPTS
 {{ Minify::javascriptDir('/js/bootstrap/') }}
 {{ Minify::javascriptDir('/js/jqueryPlugins/') }}
 {{ Minify::javascriptDir('/js/plugins/') }}
+{{ Minify::javascriptDir('/js/base/') }}
 {{ Minify::javascriptDir('/js/quatro/') }}

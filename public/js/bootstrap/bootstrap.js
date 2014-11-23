@@ -1568,7 +1568,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
 +function ($) {
   'use strict';
 
-  // POPOVER PUBLIC CLASS DEFINITION
+  // PUBLIC CLASS DEFINITION
   // ===============================
 
   var Popover = function (element, options) {

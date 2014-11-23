@@ -15,7 +15,7 @@
             <th></th>
         </tr>
         @foreach ($users as $user)
-            <tr @if (!$user->active) class="danger rowlink" @else class="rowlink" @endif data-link="row">
+            <tr @if ($user->deleted_at) class="danger rowlink" @else class="rowlink" @endif data-link="row">
                 <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->username }}</td>
