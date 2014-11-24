@@ -18,6 +18,7 @@ Route::post('/login', 'UserController@processLogin');
 Route::get('/logout', 'UserController@logout');
 
 Route::get('users/destroy/{id}', 'UserController@destroy');
+Route::get('users/revive/{id}', 'UserController@revive');
 Route::resource('users', 'UserController');
 
 Route::get('/denied', array('as' => 'denied', function()

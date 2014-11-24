@@ -11,21 +11,21 @@ class UserRepository extends BaseRepository {
 
     /**
      * Validate the password
-     * @param $password
-     * @param $passwordConfirmation
+     * @param $input
      * @return bool
      */
-    function validatePassword($password, $passwordConfirmation) { {
-        $validator = Validator::make(
-            array(
-                'password' => $password,
-                'password_confirmation' => $passwordConfirmation
-            ),
-            array(
-                'password' => 'required|between:4,16|alpha_num|confirmed',
-                'password_confirmation' => 'required|between:4,16|alpha_num'
-            )
-        );
+    function validate($input, $extraRules) { {
+        $rules = array_merge(array(
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'user_type_id' => 'required',
+            'email' => 'required|email|unique:users',
+            'username' => 'required|unique:users|alpha_dash',
+            'pwssword' => 'required|between:4,16|alpha_num|confirmed',
+            'username' => 'required|between:4,16|alpha_num'
+        ), $extraRules);
+
+        $validator = Validator::make($input, $rules);
         if ($validator->fails()) {
             $this->setError($validator->errors());
             return false;
@@ -35,9 +35,7 @@ class UserRepository extends BaseRepository {
 
     }
     function store($input) {
-        //Handle password
-        //Validate password before hashing
-        if (!$this->validatePassword($input['password'], $input['password_confirmation'])) {
+        if (!$this->validate($input)) {
             return false;
         }
         $hash = Hash::make($input['password']);
@@ -50,17 +48,22 @@ class UserRepository extends BaseRepository {
         if (!$result) {
             $this->setError($user->errors());
         }
-        return $result;
+        return $user->id;
     }
 
     function update($id, $input) {
         $hash = null;
-        //Handle password
-        //Validate password before hashing
+        if (!$this->validate($input,
+            array(
+                'password' => 'between:4,16|alpha_num|confirmed',
+                'password_confirmation' => 'between:4,16|alpha_num',
+                'email' => 'required|email',
+                'username' => 'required|alpha_dash',
+            )
+        )) {
+            return false;
+        }
         if (!empty($input['password'])) {
-            if (!$this->validatePassword($input['password'], $input['password_confirmation'])) {
-                return false;
-            }
             $hash = Hash::make($input['password']);
             unset($input['password']);
             unset($input['password_confirmation']);
@@ -70,7 +73,7 @@ class UserRepository extends BaseRepository {
             $user->password = $hash;
         }
 
-        $result = $user->updateUniques();
+        $result = $user->save();
         if (!$result) {
             $this->setError($user->errors());
         }
@@ -87,6 +90,24 @@ class UserRepository extends BaseRepository {
         $apiKey = Chrisbjr\ApiGuard\ApiKey::where('user_id', '=', $id)->first();
         if($apiKey) {
             $api_key_result = $apiKey->delete();
+            if (!$api_key_result) {
+                $this->setError($apiKey->errors());
+                return $api_key_result;
+            }
+        }
+        return $result;
+    }
+
+    function revive($id) {
+        $user = User::withTrashed()->find($id);
+        $result = $user->restore();
+        if (!$result) {
+            $this->setError($user->errors());
+            return $result;
+        }
+        $apiKey = Chrisbjr\ApiGuard\ApiKey::where('user_id', '=', $id)->first();
+        if($apiKey) {
+            $api_key_result = $apiKey->restore();
             if (!$api_key_result) {
                 $this->setError($apiKey->errors());
                 return $api_key_result;

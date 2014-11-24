@@ -44,7 +44,7 @@ class UserController extends \BaseController {
         if (!$result) {
             return Redirect::route('users.create')->withInput()->withErrors($this->user->errors());
         } else {
-            return Redirect::route('users.index')->with('message', 'User created!')->with('context', 'success');
+            return Redirect::route('users.edit', array($result))->with('message', 'User created!')->with('context', 'success');
         }
 	}
 
@@ -69,7 +69,7 @@ class UserController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$user = $this->user->find($id);
+		$user = $this->user->withTrashed()->find($id);
         if (!$user) {
             return $this->message('No user found', $this->not_found_message);
         }
@@ -94,7 +94,7 @@ class UserController extends \BaseController {
         if (!$result) {
             return Redirect::route('users.edit', array($id))->withInput()->withErrors($this->user->errors());
         } else {
-            return Redirect::route('users.index')->with('message', 'User updated!')->with('context', 'success');
+            return Redirect::route('users.edit', array($id))->with('message', 'User updated!')->with('context', 'success');
         }
 	}
 
@@ -102,11 +102,23 @@ class UserController extends \BaseController {
 	{
         $result = $this->user->destroy($id);
         if (!$result) {
-            return Redirect::route('users.edit', array($id))->with('danger', 'Error deactivating user.!')->with('context', 'danger');
+            return Redirect::route('users.edit', array($id))->with('danger', 'Error deactivating user!')->with('context', 'danger');
         } else {
-            return Redirect::route('users.index')->with('message', 'User deactivated!')->with('context', 'success');
+            return Redirect::route('users.edit', array($id))->with('message', 'User deactivated!')->with('context', 'success');
         }
 	}
+
+    public function revive($id)
+    {
+        $result = $this->user->revive($id);
+        if (!$result) {
+            var_dump($this->user->errors());
+            exit;
+            return Redirect::route('users.edit', array($id))->with('danger', 'Error reviving user!')->with('context', 'danger');
+        } else {
+            return Redirect::route('users.edit', array($id))->with('message', 'User revived!')->with('context', 'success');
+        }
+    }
 
     function login() {
         return View::make('user.login');

@@ -1,7 +1,5 @@
 <?php
 
-use LaravelBook\Ardent\Ardent;
-
-class UserType extends Ardent {
+class UserType extends Eloquent {
 
 }

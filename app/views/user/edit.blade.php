@@ -9,7 +9,26 @@
 
             <div class="col-sm-8 col-sm-offset-2">
                 <h1 class="section-title"><span class="title-gear bootbox-html" bootbox-target=".options" bootbox-title="User Options"><i class="fa fa-gear"></i></span>Edit User</h1>
-                <div class="options hide">@include('user.options')</div>
+                <div class="options hide">
+                    <ul class="nav navmenu-nav">
+                        @if($user->deleted_at)
+                        <li>
+                            <a class="bootbox-confirm" href="{{ action('UserController@revive', array($user->id)) }}"><i class="fa fa-life-ring"></i> Revive</a>
+                        </li>
+                        @else
+                        <li>
+                            <a class="bootbox-confirm" href="{{ action('UserController@destroy', array($user->id)) }}"><i class="fa fa-remove"></i> Destroy</a>
+                        </li>
+                        @endif
+                    </ul>
+                </div>
+
+                @if($user->deleted_at)
+                <div class="alert alert-danger" role="alert">
+                  <i class="fa fa-exclamation"></i>
+                  This user is inactive.
+                </div>
+                @endif
             </div>
 
             <div class="row">

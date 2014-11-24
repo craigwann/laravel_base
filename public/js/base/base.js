@@ -1,5 +1,5 @@
-function process_content($selector) {
-    $($selector).find('.bootbox-html').each(function(index, el) {
+function process_content(item) {
+    jQuery(item).find('.bootbox-html').each(function(index, el) {
         var target = el.getAttribute('bootbox-target');
         var message = $(target).html();
         jQuery(el).on( "click", function() {
@@ -9,11 +9,11 @@ function process_content($selector) {
             });
         });
         $(document).on("shown.bs.modal", function (event) {
-            process_content('.modal-dialog');
+            process_content(event.target);
         });
     });
 
-    $($selector).find('.bootbox-confirm').each(function(index, el) {
+    jQuery(item).find('.bootbox-confirm').each(function(index, el) {
         var message = jQuery(el).attr('confirm-message');
         var href = jQuery(el).attr('href');
 
@@ -36,5 +36,5 @@ function process_content($selector) {
 }
 
 $(document).ready(function() {
-    process_content('body');
+    process_content($('body'));
 });
