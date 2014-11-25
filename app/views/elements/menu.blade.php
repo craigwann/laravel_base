@@ -11,7 +11,7 @@
             </button>
 
             <!-- ======= LOGO ========-->
-            <a class="navbar-brand scrollto" href="/">
+            <a class="navbar-brand" href="/">
 
                 <img class="site-logo" src="/images/logo-small.png" alt="logo" />
             </a>
@@ -21,7 +21,7 @@
         <div id="site-nav" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="/login" class="scrollto">Login</a>
+                    <a href="/login">Login</a>
                 </li>
             </ul>
         </div><!--End navbar-collapse -->

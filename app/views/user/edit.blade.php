@@ -50,9 +50,7 @@
 
         </section>
 
-        @if ((Auth::checkAccess(Config::get('auth.userType.admin')))
-                && !empty($apiKey->id)
-                && (!$apiKey->deleted_at))
+        @if ((Auth::checkAccess(Config::get('auth.userType.admin'))))
 
             <section class="gray-bg padding-top-bottom">
                 <h2 class="section-title">API Key</h2>
@@ -65,7 +63,7 @@
                             <h3>Key: {{ $apiKey->key }}</h3>
                         @endif
 
-                        {{ BootForm::select('Level', 'level')->options(['' => 'Choose Level...', 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9, 10 => 10]) }}
+                        {{ BootForm::select('Level', 'level')->options($apiKeyOptions) }}
                         {{ BootForm::select('Ignore Limits', 'ignore_limits')->options(['' => 'Ignore Limits?', true => 'Yes', false => 'No']) }}
 
                         <p class="text-center">
