@@ -14,7 +14,7 @@ class UserRepository extends BaseRepository {
      * @param $input
      * @return bool
      */
-    function validate($input, $extraRules) { {
+    function validate($input, $extraRules = array()) {
         $rules = array_merge(array(
             'first_name' => 'required',
             'last_name' => 'required',
@@ -33,7 +33,6 @@ class UserRepository extends BaseRepository {
         return true;
     }
 
-    }
     function store($input) {
         if (!$this->validate($input)) {
             return false;
