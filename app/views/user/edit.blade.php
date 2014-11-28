@@ -49,36 +49,4 @@
 
 
         </section>
-
-        @if ((Auth::checkAccess(Config::get('auth.userType.admin'))))
-
-            <section class="gray-bg padding-top-bottom">
-                <h2 class="section-title">API Key</h2>
-
-                <div class="row">
-
-                   {{ BootForm::open()->attribute('class', 'col-sm-8 col-sm-offset-2')->action('users/' . $user->id . '/apikey') }}
-                        @if (!empty($apiKey->id))
-                            {{ Bootform::bind($apiKey) }}
-                            <h3>Key: {{ $apiKey->key }}</h3>
-                        @endif
-
-                        {{ BootForm::select('Level', 'level')->options($apiKeyOptions) }}
-                        {{ BootForm::select('Ignore Limits', 'ignore_limits')->options(['' => 'Ignore Limits?', true => 'Yes', false => 'No']) }}
-
-                        <p class="text-center">
-                            <button name="submit" type="submit" class="btn btn-quattro" data-error-message="Error!" data-sending-message="Sending..." data-ok-message="Message Sent">
-                                <i class="fa fa-key"></i>
-                                @if(!empty($apiKey->id))
-                                    Save Key
-                                @else
-                                    Generate Key
-                                @endif
-                            </button>
-                        </p>
-                    {{ BootForm::close() }}
-
-                </div>
-            </section>
-        @endif
 @stop
