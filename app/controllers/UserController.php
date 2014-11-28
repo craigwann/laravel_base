@@ -5,10 +5,13 @@ class UserController extends \BaseController {
     protected $userType;
     protected $apiKey;
 
-    function __construct(UserRepository $userRepository, UserTypeRepository $userTypeRepository, ApiKeyRepository $apiKeyRepository) {
+    function __construct(
+        UserRepository $userRepository,
+        UserTypeRepository $userTypeRepository
+    )
+    {
         $this->user = $userRepository;
         $this->userType = $userTypeRepository;
-        $this->apiKey = $apiKeyRepository;
 
         $this->beforeFilter('access:' . Config::get('auth.userType.manager'), array('except' => array('login', 'processLogin')));
     }
