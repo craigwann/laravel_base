@@ -32,7 +32,7 @@ class UserController extends \BaseController {
 	 */
 	public function create()
 	{
-        return View::make('user.create', array('user_type_options' => $this->userType->listOptions()));
+        return View::make('user.create', array('userTypeOptions' => $this->userType->listOptions()));
 	}
 
 
@@ -77,12 +77,10 @@ class UserController extends \BaseController {
             return $this->message('No user found', $this->not_found_message);
         }
         $data = $user->with('userType')->first();
-        $apiKey = $user->apiKey()->first();
 
         $data['userTypeOptions'] = $this->userType->listOptions();
-        $data['apiKeyOptions'] = $this->apiKey->listOptions();
 
-        return View::make('user.edit', $data)->with('user', $user)->with('apiKey', $apiKey);
+        return View::make('user.edit', $data)->with('user', $user);
 	}
 
 
@@ -155,9 +153,14 @@ class UserController extends \BaseController {
         }
 
         if (Auth::attempt($userData)) {
-            return Redirect::to('/');
+            return Redirect::route('dashboard')->with('message', 'Welcome, ' . Input::get('username') . '!')->with('context', 'success');
         } else {
             return Redirect::route('login')->with('message', 'Incorrect username or password.')->with('context', 'danger');
         }
+    }
+
+    function logout() {
+        Auth::logout();
+        return Redirect::route('login')->with('message', 'Logged out.')->with('context', 'success');
     }
 }

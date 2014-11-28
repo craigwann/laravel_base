@@ -20,9 +20,18 @@
 
         <div id="site-nav" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
+            @if (Auth::guest())
                 <li>
                     <a href="/login">Login</a>
                 </li>
+            @else
+                <li>
+                   <a href="{{ action('DashboardController@show') }}"><i class="fa fa-user"></i> {{Auth::user()->username}}</a>
+                </li>
+                <li>
+                    <a href="{{ action('UserController@logout') }}"><i class="fa fa-sign-out"></i> Logout</a>
+                </li>
+            @endif
             </ul>
         </div><!--End navbar-collapse -->
 

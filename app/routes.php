@@ -11,15 +11,18 @@
 |
 */
 
+//HOME
 Route::get('/', 'HomeController@show');
 
+//DASHBOARD
+Route::get('/dashboard', array('as' => 'dashboard', 'uses' => 'DashboardController@show'));
+
+//USER
 Route::get('/login', array('as' => 'login', 'uses' => 'UserController@login'));
 Route::post('/login', 'UserController@processLogin');
 Route::get('/logout', 'UserController@logout');
-
 Route::get('users/destroy/{id}', 'UserController@destroy');
 Route::get('users/revive/{id}', 'UserController@revive');
-Route::match(array('PUT', 'POST'), '/users/{id}/apikey', 'UserController@saveApiKey');
 Route::resource('users', 'UserController');
 
 Route::get('/denied', array('as' => 'denied', function()
