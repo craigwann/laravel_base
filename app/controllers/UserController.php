@@ -153,7 +153,7 @@ class UserController extends \BaseController {
         }
 
         if (Auth::attempt($userData)) {
-            return Redirect::route('dashboard')->with('message', 'Welcome, ' . Input::get('username') . '!')->with('context', 'success');
+            return Redirect::route('dashboard')->with('message', 'Welcome, ' . Auth::user()->username . '!')->with('context', 'success');
         } else {
             return Redirect::route('login')->with('message', 'Incorrect username or password.')->with('context', 'danger');
         }
