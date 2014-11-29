@@ -8,6 +8,18 @@
                 </ul>
             </li>
         @endif
+        @if (Auth::checkAccess(Config::get('auth.userType.gameMaster')))
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Game Master Tools <b class="caret"></b></a>
+                <ul class="dropdown-menu navmenu-nav" role="menu">
+                    <li><a href="#">Baddie Generator</a></li>
+                    <li><a href="#">Character Builder</a></li>
+                    <li><a href="#">Dice Roller</a></li>
+                    <li><a href="#">Item Generator</a></li>
+                    <li><a href="#">NPC Generator</a></li>
+                </ul>
+            </li>
+        @endif
          <li><a href="{{ action('DirectoryController@show') }}">Rules</a></li>
     </ul>
 </nav>
