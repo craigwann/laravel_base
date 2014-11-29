@@ -127,6 +127,7 @@ return array(
         'EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider',
         'Chrisbjr\ApiGuard\ApiGuardServiceProvider',
         'DaveJamesMiller\Breadcrumbs\ServiceProvider',
+        'Clockwork\Support\Laravel\ClockworkServiceProvider',
 	),
 
 	/*

@@ -4,6 +4,17 @@ class BaseController extends Controller {
 
     protected $not_found_message = "You must have failed your perception check.";
 
+    function __construct() {
+        $this->beforeFilter(function()
+        {
+            Event::fire('clockwork.controller.start');
+        });
+
+        $this->afterFilter(function()
+        {
+            Event::fire('clockwork.controller.end');
+        });
+    }
 	/**
 	 * Setup the layout used by the controller.
 	 *

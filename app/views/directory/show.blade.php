@@ -1,11 +1,15 @@
 @extends('layouts.leftSidebar')
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('directory') }}
+@stop
+
 @section('sidebar')
-    @include('dashboard.sidebar')
+    @include('directory.sidebar')
 @stop
 
 @section('content')
-    <h1>Welcome {{ Auth::user()->username }}!</h1>
+    <h1>Getting Started</h1>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consequat leo quis justo tincidunt ultrices sed vel lectus. Praesent imperdiet lacus rutrum elit faucibus ullamcorper. Vestibulum ultricies odio vel sapien dictum rutrum. Suspendisse non scelerisque justo. Morbi tincidunt facilisis odio ut consequat. Maecenas tempus, mauris quis posuere dictum, justo purus semper justo, id faucibus magna diam ut nisi. Aliquam suscipit massa nisi, a tincidunt velit rhoncus quis. Cras magna nulla, vulputate ut congue et, auctor vitae nisl. Fusce pulvinar scelerisque turpis ac ornare. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed dictum fermentum iaculis. Phasellus diam augue, varius at volutpat sit amet, rhoncus consequat massa. Integer mollis nec justo ut lobortis. Sed convallis dictum augue, ut convallis justo.
     </p>

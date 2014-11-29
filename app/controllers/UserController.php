@@ -14,6 +14,7 @@ class UserController extends \BaseController {
         $this->userType = $userTypeRepository;
 
         $this->beforeFilter('access:' . Config::get('auth.userType.manager'), array('except' => array('login', 'processLogin')));
+        parent::__construct();
     }
 
 	/**

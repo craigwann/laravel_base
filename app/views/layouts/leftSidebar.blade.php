@@ -11,14 +11,26 @@
 
 <div class="container main">
 
-    @if(Session::has('message'))
-    <div @if(Session::has('context')) class="alert alert-{{ Session::get('context') }}" @else class="alert" @endif role="alert">
-      {{ Session::get('message') }}
-    </div>
-    @endif
+    <div class="row">
 
-    @yield('sidebar')
-    @yield('content')
+        @if(Session::has('message'))
+        <div @if(Session::has('context')) class="alert alert-{{ Session::get('context') }}" @else class="alert" @endif role="alert">
+          {{ Session::get('message') }}
+        </div>
+        @endif
+
+        <div class="col-md-4">
+                <div class="bs-sidebar hidden-print affix" role="complementary">
+                     @yield('sidebar')
+                </div>
+            </div>
+
+            <div class="col-md-8" role="main">
+                @yield('content')
+            </div>
+        </div>
+    </div>
+
 </div>
 
 @include('elements.footer')

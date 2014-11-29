@@ -17,6 +17,12 @@ Route::get('/', 'HomeController@show');
 //DASHBOARD
 Route::get('/dashboard', array('as' => 'dashboard', 'uses' => 'DashboardController@show'));
 
+//DIRECTORY
+Route::get('/rules', array('as' => 'rules', 'uses' => 'DirectoryController@show'));
+
+//MILESTONES
+Route::resource('milestones', 'MilestoneController');
+
 //USER
 Route::get('/login', array('as' => 'login', 'uses' => 'UserController@login'));
 Route::post('/login', 'UserController@processLogin');

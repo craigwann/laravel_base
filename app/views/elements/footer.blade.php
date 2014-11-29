@@ -21,7 +21,6 @@
 SCRIPTS
 =============================================== -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('{{ Minify::javascriptDir('/js/jquery/') }}')</script>
 
 {{ Minify::javascriptDir('/js/bootstrap/') }}
 {{ Minify::javascriptDir('/js/jqueryPlugins/') }}
