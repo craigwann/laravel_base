@@ -120,12 +120,9 @@ class MilestoneRepository extends BaseRepository {
     }
 
     function index($paginate = 0) {
-        $user = DB::table('users')
-            ->select('users.id', 'users.first_name', 'users.last_name', 'users.email', 'users.username', 'users.deleted_at', 'user_types.name as user_type_name', 'user_types.id as user_type_id')
-            ->leftJoin('user_types', 'users.user_type_id', '=', 'user_types.id');
         if ($paginate) {
-            return $user->paginate($paginate);
+            return Milestone::paginate($paginate);
         }
-        return $user->get();
+        return Milestone::all();
     }
 } 

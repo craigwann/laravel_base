@@ -55,21 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="breadcrumbs.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/breadcrumbs.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="390">
-              <caret line="9" column="53" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/milestone/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36" vertical-offset="0" max-vertical-offset="625">
-              <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.384" vertical-offset="0" max-vertical-offset="625">
+              <caret line="16" column="175" selection-start-line="16" selection-start-column="175" selection-end-line="16" selection-end-column="175" />
               <folding />
             </state>
           </provider>
@@ -78,8 +68,18 @@
       <file leaf-file-name="MilestoneController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/MilestoneController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.875" vertical-offset="15" max-vertical-offset="1920">
-              <caret line="20" column="19" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="19" />
+            <state vertical-scroll-proportion="-12.5" vertical-offset="0" max-vertical-offset="1920">
+              <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MilestoneRepository.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/repositories/MilestoneRepository.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-18.541666" vertical-offset="1295" max-vertical-offset="1920">
+              <caret line="121" column="35" selection-start-line="121" selection-start-column="35" selection-end-line="121" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -88,8 +88,8 @@
       <file leaf-file-name="sidebar.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/dashboard/sidebar.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.25" vertical-offset="0" max-vertical-offset="450">
-              <caret line="18" column="58" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
+            <state vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="450">
+              <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -167,14 +167,12 @@
         <option value="$PROJECT_DIR$/app/controllers/DashboardController.php" />
         <option value="$PROJECT_DIR$/app/models/Milestone.php" />
         <option value="$PROJECT_DIR$/app/views/elements/sidebar.blade.php" />
-        <option value="$PROJECT_DIR$/app/repositories/MilestoneRepository.php" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/app/config/app.php" />
         <option value="$PROJECT_DIR$/app/controllers/UserController.php" />
         <option value="$PROJECT_DIR$/app/controllers/BaseController.php" />
         <option value="$PROJECT_DIR$/app/filters.php" />
         <option value="$PROJECT_DIR$/app/auth/ironQuestGuard.php" />
-        <option value="$PROJECT_DIR$/app/controllers/MilestoneController.php" />
         <option value="$PROJECT_DIR$/app/views/layouts/leftSidebar.blade.php" />
         <option value="$PROJECT_DIR$/app/views/dashboard/show.blade.php" />
         <option value="$PROJECT_DIR$/app/views/rules/sidebar.blade.php" />
@@ -185,6 +183,8 @@
         <option value="$PROJECT_DIR$/app/views/directory/sidebar.blade.php" />
         <option value="$PROJECT_DIR$/app/views/elements/footer.blade.php" />
         <option value="$PROJECT_DIR$/app/views/dashboard/sidebar.blade.php" />
+        <option value="$PROJECT_DIR$/app/repositories/MilestoneRepository.php" />
+        <option value="$PROJECT_DIR$/app/controllers/MilestoneController.php" />
         <option value="$PROJECT_DIR$/app/views/milestone/index.blade.php" />
       </list>
     </option>
@@ -471,6 +471,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dashboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ironquest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ironquest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="repositories" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -856,14 +874,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/repositories/MilestoneRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.625" vertical-offset="15" max-vertical-offset="1965">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/composer.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.5" vertical-offset="120" max-vertical-offset="780">
@@ -1024,14 +1034,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/dashboard/sidebar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.25" vertical-offset="0" max-vertical-offset="450">
-          <caret line="18" column="58" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/user/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-18.125" vertical-offset="0" max-vertical-offset="540">
@@ -1040,18 +1042,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/repositories/MilestoneRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.541666" vertical-offset="1295" max-vertical-offset="1920">
+          <caret line="121" column="35" selection-start-line="121" selection-start-column="35" selection-end-line="121" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/MilestoneController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.875" vertical-offset="15" max-vertical-offset="1920">
-          <caret line="20" column="19" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="19" />
+        <state vertical-scroll-proportion="-12.5" vertical-offset="0" max-vertical-offset="1920">
+          <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/dashboard/sidebar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="450">
+          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="69" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/milestone/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36" vertical-offset="0" max-vertical-offset="625">
-          <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.384" vertical-offset="0" max-vertical-offset="625">
+          <caret line="16" column="175" selection-start-line="16" selection-start-column="175" selection-end-line="16" selection-end-column="175" />
           <folding />
         </state>
       </provider>
