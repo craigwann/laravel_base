@@ -30,7 +30,7 @@ class MilestoneController extends \BaseController {
      */
     public function create()
     {
-        return View::make('milestone.create', array('milestoneTypeOptions' => $this->milestoneType->listOptions()));
+        return View::make('milestone.create');
     }
 
 

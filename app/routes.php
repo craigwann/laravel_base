@@ -43,8 +43,12 @@ Route::get('/denied', array('as' => 'denied', function()
 |
 */
 
-Route::get('api/v1/users', 'UserApiController@index');
-Route::get('api/v1/users/{id}', 'UserApiController@show');
-Route::post('api/v1/users/{id}', 'UserApiController@authenticate');
-Route::get('api/v1/users/{id}', 'UserApiController@getUserDetails');
-Route::put('api/v1/users/{id}', 'UserApiController@deauthenticate');
+//MILESTONE
+Route::get('api/v1/milestones', 'api\v1\MilestoneApiController@index');
+Route::get('api/v1/milestones/{id}', 'api\v1\MilestoneApiController@show');
+
+//USER
+Route::get('api/v1/users', 'api\v1\UserApiController@index');
+Route::get('api/v1/users/{id}', 'api\v1\UserApiController@show');
+Route::post('api/v1/users/{id}', 'api\v1\UserApiController@authenticate');
+Route::put('api/v1/users/{id}', 'api\v1\UserApiController@deauthenticate');

@@ -1,25 +1,33 @@
-<?php
+<?php namespace api\v1;
 
 use Chrisbjr\ApiGuard\ApiGuardController;
+use Chrisbjr\ApiGuard\ApiKey;
+use Chrisbjr\ApiGuard\Transformers\ApiKeyTransformer;
 
 class UserApiController extends ApiGuardController {
     protected $user;
     protected $userType;
 
-    protected $apiMethods = [
-        'all' => [
-            'keyAuthentication' => true,
-            'level' => kManagerLevel
-        ],
-        'authenticate' => [
-            'keyAuthentication' => false
-        ]
-    ];
-
-    function __construct(UserRepository $userRepository, UserTypeRepository $userTypeRepository) {
+    function __construct(
+        \UserRepository $userRepository,
+        \UserTypeRepository $userTypeRepository
+    ) {
         $this->user = $userRepository;
         $this->userType = $userTypeRepository;
+        $this->setApiMethods();
         parent::__construct();
+    }
+
+    function setApiMethods() {
+        $this->apiMethods = [
+            'all' => [
+                'keyAuthentication' => true,
+                'level' => \Config::get('auth.userType.manager')
+            ],
+            'authenticate' => [
+                'keyAuthentication' => false
+            ]
+        ];
     }
 
 	/**
@@ -30,7 +38,7 @@ class UserApiController extends ApiGuardController {
 	public function index()
 	{
 		$users = $this->user->index(15);
-        return $users->toJson();
+        return $this->response->withPaginator($users, new \UserTransformer());
 	}
 
 	/**
@@ -46,7 +54,7 @@ class UserApiController extends ApiGuardController {
             return $this->response->errorNotFound();
         }
         $data = $user->userType()->get();
-        return $data->toJson();
+        return $this->response->withItem($data, new \UserTransformer());
     }
 
     public function authenticate() {
@@ -81,9 +89,9 @@ class UserApiController extends ApiGuardController {
 
         // We have validated this user
         // Assign an API key for this session
-        $apiKey = Chrisbjr\ApiGuard\ApiKey::where('user_id', '=', Auth::user()->id)->first();
+        $apiKey = ApiKey::where('user_id', '=', Auth::user()->id)->first();
         if (!isset($apiKey)) {
-            $apiKey                = new Chrisbjr\ApiGuard\ApiKey;
+            $apiKey                = new ApiKey;
             $apiKey->user_id       = Auth::user()->id;
             $apiKey->key           = $apiKey->generateKey();
             $apiKey->level         = 5;
@@ -97,7 +105,7 @@ class UserApiController extends ApiGuardController {
         }
 
         // We have an API key.. i guess we only need to return that.
-        return $apiKey->toJson();
+        return $this->response->withItem($apiKey, new ApiKeyTransformer);
     }
 
     public function getUserDetails() {

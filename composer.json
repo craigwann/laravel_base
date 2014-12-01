@@ -23,7 +23,8 @@
 			"app/database/seeds",
             "app/providers",
             "app/repositories",
-			"app/tests/TestCase.php"
+			"app/tests/TestCase.php",
+            "app/transformers"
 		]
 	},
 	"scripts": {

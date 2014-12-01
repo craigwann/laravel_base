@@ -11,13 +11,9 @@ class MilestoneRepository extends BaseRepository {
 
     function validate($input, $extraRules = array()) {
         $rules = array_merge(array(
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'user_type_id' => 'required',
-            'email' => 'required|email|unique:users',
-            'username' => 'required|unique:users|alpha_dash',
-            'pwssword' => 'required|between:4,16|alpha_num|confirmed',
-            'username' => 'required|between:4,16|alpha_num'
+            'name' => 'required',
+            'short' => 'required|max:256',
+            'text' => 'required',
         ), $extraRules);
 
         $validator = Validator::make($input, $rules);
@@ -32,17 +28,13 @@ class MilestoneRepository extends BaseRepository {
         if (!$this->validate($input)) {
             return false;
         }
-        $hash = Hash::make($input['password']);
-        unset($input['password']);
-        unset($input['password_confirmation']);
 
-        $user = $this->buildPayload(new User(), $input);
-        $user->password = $hash;
-        $result = $user->save();
+        $milestone = $this->buildPayload(new Milestone(), $input);
+        $result = $milestone->save();
         if (!$result) {
-            $this->setError($user->errors());
+            $this->setError($milestone->errors());
         }
-        return $user->id;
+        return $milestone->id;
     }
 
     function update($id, $input) {
@@ -110,13 +102,11 @@ class MilestoneRepository extends BaseRepository {
         return $result;
     }
 
-    function buildPayload($user, $input) {
-        $user->first_name = $input['first_name'];
-        $user->last_name = $input['last_name'];
-        $user->username = $input['username'];
-        $user->email = $input['email'];
-        $user->user_type_id = $input['user_type_id'];
-        return $user;
+    function buildPayload($payload, $input) {
+        $payload->name = $input['name'];
+        $payload->short = $input['short'];
+        $payload->text = $input['text'];
+        return $payload;
     }
 
     function index($paginate = 0) {
