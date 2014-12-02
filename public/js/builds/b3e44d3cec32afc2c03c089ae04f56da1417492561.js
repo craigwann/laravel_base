@@ -4,5 +4,5 @@ jQuery(el).on("click",function(event){event.preventDefault();bootbox.confirm(mes
 if(!options.target){options.target='.drawer-target';}
 if(!options.toggle){options.toggle='.drawer-toggle';}
 var drawer=jQuery(el).find(options.target);var toggleEl=jQuery(el).find(options.toggle);var toggleActive=function(){if(jQuery(drawer).is(":hidden")){if(jQuery(toggleEl).is(':checkbox')){jQuery(toggleEl).prop('checked',false);}else{jQuery(toggleEl).removeClass('active');}}else{if(jQuery(toggleEl).is(':checkbox')){jQuery(toggleEl).prop('checked',true);}else{jQuery(toggleEl).addClass('active');}}}
-toggleActive();jQuery(toggleEl).on("click",function(event){jQuery(drawer).slideToggle("fast",function(){toggleActive();});});});}
+toggleActive();jQuery(toggleEl).on("click",function(event){jQuery(drawer).slideToggle("fast",function(){toggleActive();});});});jQuery(item).find('.clone-container').each(function(index,el){jQuery(el).cloneya({limit:999,cloneThis:'.clone-target',valueClone:false,dataClone:false,deepClone:false,cloneButton:'.clone',deleteButton:'.delete',clonePosition:'after',serializeID:true,ignore:'label.error'});});}
 $(document).ready(function(){process_content($('body'));});

@@ -56,6 +56,8 @@
 
 .drawer-target {
     display: none;
-    border-left: solid 2px #F75443;
-    padding-left: 10px;
+}
+
+.large-text {
+    font-size: 1.1em;
 }

@@ -74,6 +74,20 @@ function process_content(item) {
         });
     });
 
+    jQuery(item).find('.clone-container').each(function(index, el) {
+        jQuery(el).cloneya({
+            limit       : 999,
+            cloneThis       : '.clone-target',
+            valueClone      : false,
+            dataClone       : false,
+            deepClone       : false,
+            cloneButton     : '.clone',
+            deleteButton    : '.delete',
+            clonePosition   : 'after',
+            serializeID         : true,
+            ignore      : 'label.error'
+        });
+    });
 
 }
 
