@@ -53,3 +53,9 @@
 .btn-primary:hover {
     background-color: #c94438;
 }
+
+.drawer-target {
+    display: none;
+    border-left: solid 2px #F75443;
+    padding-left: 10px;
+}

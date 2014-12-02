@@ -33,6 +33,48 @@ function process_content(item) {
         });
 
     });
+
+    jQuery(item).find('.drawer').each(function(index, el) {
+        var opts = jQuery(el).attr('drawer-options');
+        if (opts) {
+            var options = opts.parseJSON();
+        } else {
+            var options = {};
+        }
+
+        if (!options.target) {
+            options.target = '.drawer-target';
+        }
+        if (!options.toggle) {
+            options.toggle = '.drawer-toggle';
+        }
+        var drawer = jQuery(el).find(options.target);
+        var toggleEl = jQuery(el).find(options.toggle);
+        var toggleActive = function() {
+            if (jQuery(drawer).is( ":hidden" )) {
+                if (jQuery(toggleEl).is(':checkbox')) {
+                    jQuery(toggleEl).prop('checked', false);
+                } else {
+                    jQuery(toggleEl).removeClass('active');
+                }
+            } else {
+                if (jQuery(toggleEl).is(':checkbox')) {
+                    jQuery(toggleEl).prop('checked', true);
+                } else {
+                    jQuery(toggleEl).addClass('active');
+                }
+            }
+        }
+        toggleActive();
+
+        jQuery(toggleEl).on("click", function(event) {
+            jQuery(drawer).slideToggle( "fast", function() {
+                toggleActive();
+            });
+        });
+    });
+
+
 }
 
 $(document).ready(function() {
