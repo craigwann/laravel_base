@@ -3,10 +3,14 @@
 class MilestoneController extends \BaseController {
 
     function __construct(
-        MilestoneRepository $milestoneRepository
+        MilestoneRepository $milestoneRepository,
+        AbilityRepository $abilityRepository,
+        AttributeModifierRepository $attributeModifierRepository
     )
     {
         $this->milestone = $milestoneRepository;
+        $this->ability = $abilityRepository;
+        $this->attributeModifier = $attributeModifierRepository;
         $this->beforeFilter('access:' . Config::get('auth.userType.player'));
         parent::__construct();
     }
@@ -30,7 +34,7 @@ class MilestoneController extends \BaseController {
      */
     public function create()
     {
-        return View::make('milestone.create');
+        return View::make('milestone.create', array('abilityOptions' => $this->ability->listOptions(), 'attributeModifierOptions' => $this->attributeModifier->listColumnOptions()));
     }
 
 

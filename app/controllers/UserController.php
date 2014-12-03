@@ -36,7 +36,7 @@ class UserController extends \BaseController {
 	 */
 	public function create()
 	{
-        return View::make('user.create', array('userTypeOptions' => $this->userType->listOptions()));
+        return View::make('user.create', array('userTypeOptions' => $this->userType->listOptions('level')));
 	}
 
 
@@ -82,7 +82,7 @@ class UserController extends \BaseController {
         }
         $data = $user->with('userType')->first();
 
-        $data['userTypeOptions'] = $this->userType->listOptions();
+        $data['userTypeOptions'] = $this->userType->listOptions('level');
 
         return View::make('user.edit', $data)->with('user', $user);
 	}

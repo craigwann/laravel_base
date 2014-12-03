@@ -28,17 +28,19 @@
 <div class="drawer">
     {{ BootForm::checkbox('It awards an attribute modifier.', 'rewards_attribute')->attribute('class', 'drawer-toggle') }}
     <div class="drawer-target">
-        {{ BootForm::text('Strength', 'ability_modifier[strength]')->placeholder('Strength') }}
-        {{ BootForm::text('Personality', 'ability_modifier[personality]')->placeholder('Personality') }}
-        {{ BootForm::text('Agility', 'ability_modifier[agility]')->placeholder('Agility') }}
-        {{ BootForm::text('Discipline', 'ability_modifier[discipline]')->placeholder('Discipline') }}
-        {{ BootForm::text('Endurance', 'ability_modifier[endurance]')->placeholder('Endurance') }}
-        {{ BootForm::text('Smarts', 'ability_modifier[smarts]')->placeholder('Smarts') }}
-        {{ BootForm::text('Health', 'ability_modifier[health]')->placeholder('Health') }}
-        {{ BootForm::text('Sanity', 'ability_modifier[sanity]')->placeholder('Sanity') }}
-        {{ BootForm::text('Stamina', 'ability_modifier[stamina]')->placeholder('Stamina') }}
-        {{ BootForm::text('Stress', 'ability_modifier[stress]')->placeholder('Stress') }}
-        {{ BootForm::text('Strain', 'ability_modifier[strain]')->placeholder('Strain') }}
-        {{ BootForm::text('Fat', 'ability_modifier[fat]')->placeholder('Fat') }}
+        <div class="clone-container">
+            <div class="clone-target row">
+                <div class="col-sm-9">
+                    {{ BootForm::select('Attribute', 'Attribute[]')->attribute('id', 'attribute')->options(array_merge(array('' => 'Choose Attribute...'), $attributeModifierOptions)) }}
+                </div>
+                <div class="col-sm-2 large-text">
+                    {{ BootForm::text('Attribute Modifier', 'attribute_modifier[]')->attribute('id', 'attribute_modifier')->placeholder('+/- ##') }}
+                </div>
+                <div class="col-sm-1 large-text">
+                    <i class="fa fa-plus-circle clone"></i>
+                    <i class="fa fa-minus-circle delete"></i>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
