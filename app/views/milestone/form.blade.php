@@ -9,19 +9,9 @@
 <div class="drawer">
     {{ BootForm::checkbox('It awards an ability.', 'rewards_ability')->attribute('class', 'drawer-toggle') }}
     <div class="drawer-target">
-        <div class="clone-container">
-            <div class="clone-target row">
-                <div class="col-sm-11">
-                    {{ BootForm::select('Ability', 'ability_id[]')->attribute('id', 'ability_id')->options(array('' => 'Choose Ability...')) }}
-                </div>
-                <div class="col-sm-1 large-text">
-                    <i class="fa fa-plus-circle clone"></i>
-                    <i class="fa fa-minus-circle delete"></i>
-                </div>
-            </div>
-        </div>
-
-
+        {{ BootForm::textarea('Ability Description', 'ability_description')->placeholder('Ability Description')->attribute('maxlength', 256)->attribute('rows', 3) }}
+        {{ BootForm::select('Target', 'targets')->attribute('multiple', true)->options($targetOptions) }}
+        {{ BootForm::select('Attunements', 'attunements')->attribute('multiple', true)->options($attunementOptions) }}
     </div>
 </div>
 
@@ -44,3 +34,7 @@
         </div>
     </div>
 </div>
+
+<hr />
+
+

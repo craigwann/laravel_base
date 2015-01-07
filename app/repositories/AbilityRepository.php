@@ -9,6 +9,4 @@
 class AbilityRepository extends BaseRepository {
     protected $modelName = 'Ability';
 
-    use OptionableTrait;
-
 } 
