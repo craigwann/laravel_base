@@ -5,7 +5,7 @@
 
 <body data-spy="scroll" data-target="#main-nav" data-offset="400">
 
-<header id="home" class="parallax-bg" data-parallax-background="/images/header-bg2.jpg" data-stellar-background-ratio=".3">
+<header id="home" class="parallax-bg" data-parallax-background="/images/header-bg1.jpg" data-stellar-background-ratio=".3">
 
     <div class="header-content">
 
@@ -17,7 +17,7 @@
 
                 <li><h1 class="bordered-text">A <span class="primary">Tabletop</span> RPG</h1></li>
                 <li><h1 class="bordered-text">Where <span class="primary">Real Life</span></h1></li>
-                <li><h1 class="bordered-text">Has <span class="primary">In Game</span> Consequences</h1></li>
+                <li><h1 class="bordered-text">Has <span class="primary">In Game</span> Effect</h1></li>
 
             </ul>
 

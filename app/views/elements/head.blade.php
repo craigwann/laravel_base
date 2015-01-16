@@ -31,6 +31,7 @@
     =============================================== -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Slabo+27px|Slabo+13px' rel='stylesheet' type='text/css'>
 
     <!-- ==============================================
     JS
