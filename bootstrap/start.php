@@ -27,7 +27,7 @@ $app = new Illuminate\Foundation\Application;
 $env = $app->detectEnvironment(array(
 
 	'local' => array('Craigs-iMac.ok.cox.net'),
-    'staging' => array('ip-10-252-79-136')
+    'staging' => array('ironquest')
 
 ));
 
