@@ -9,11 +9,11 @@ class UserApiController extends ApiGuardController {
     protected $userType;
 
     function __construct(
-        \UserRepository $userRepository,
-        \UserTypeRepository $userTypeRepository
+        \UserService $userService,
+        \UserTypeService $userTypeService
     ) {
-        $this->user = $userRepository;
-        $this->userType = $userTypeRepository;
+        $this->user = $userService;
+        $this->userType = $userTypeService;
         $this->setApiMethods();
         parent::__construct();
     }

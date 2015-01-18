@@ -1,4 +1,4 @@
-<?php
+<?php namespace Ironquest\Services;
 /**
  * Created by PhpStorm.
  * User: craig
@@ -10,6 +10,7 @@
  */
 
 trait OptionableTrait {
+
     protected $database = 'ironquest';
 
     function listOptions($orderBy = 'id', $format = array('id' => 'name')) {

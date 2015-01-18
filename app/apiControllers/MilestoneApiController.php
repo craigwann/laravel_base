@@ -6,10 +6,10 @@ class MilestoneApiController extends ApiGuardController {
     protected $milestone;
 
     function __construct(
-        \MilestoneRepository $milestoneRepository
+        \MilestoneService $milestoneService
     )
     {
-        $this->milestone = $milestoneRepository;
+        $this->milestone = $milestoneService;
         parent::__construct();
     }
 

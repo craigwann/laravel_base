@@ -1,4 +1,4 @@
-<?php
+<?php namespace Ironquest\Services;
 /**
  * Created by PhpStorm.
  * User: craig
@@ -8,8 +8,11 @@
 
 use \Chrisbjr\ApiGuard;
 
-class ApiKeyRepository extends BaseRepository {
-    protected $modelName = 'ApiKey';
+class ApiKey extends BaseService {
+
+    function __construct(\Chrisbjr\ApiGuard\ApiKey $model) {
+        $this->model = $model;
+    }
 
     /**
      * List as options for display. Result can be dropped as is into a form select.

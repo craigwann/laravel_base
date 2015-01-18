@@ -6,12 +6,12 @@ class UserController extends \BaseController {
     protected $apiKey;
 
     function __construct(
-        UserRepository $userRepository,
-        UserTypeRepository $userTypeRepository
+        Ironquest\Services\User $user,
+        Ironquest\Services\UserType $userType
     )
     {
-        $this->user = $userRepository;
-        $this->userType = $userTypeRepository;
+        $this->user = $user;
+        $this->userType = $userType;
 
         $this->beforeFilter('access:' . Config::get('auth.userType.manager'), array('except' => array('login', 'processLogin')));
         parent::__construct();

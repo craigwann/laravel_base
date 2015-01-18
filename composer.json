@@ -21,8 +21,8 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-            "app/providers",
-            "app/repositories",
+            "app/services",
+            "app/Validators",
 			"app/tests/TestCase.php",
             "app/transformers"
 		]

@@ -1,4 +1,4 @@
-<?php
+<?php namespace Ironquest\Services;
 /**
  * Created by PhpStorm.
  * User: craig
@@ -6,7 +6,7 @@
  * Time: 8:32 PM
  */
 
-class UserTypeRepository extends BaseRepository {
+class UserType extends BaseService {
     use OptionableTrait;
 
     protected $modelName = 'UserType';

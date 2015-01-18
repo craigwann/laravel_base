@@ -1,4 +1,4 @@
-<?php
+<?php namespace Ironquest\Services;
 /**
  * Created by PhpStorm.
  * User: craig
@@ -6,47 +6,38 @@
  * Time: 8:31 PM
  */
 
-class MilestoneRepository extends BaseRepository {
-    protected $modelName = 'Milestone';
+use Ironquest\Validators\UserValidator;
 
-    function validate($input, $extraRules = array()) {
-        $rules = array_merge(array(
-            'name' => 'required',
-            'short' => 'required|max:256',
-            'text' => 'required',
-        ), $extraRules);
-
-        $validator = Validator::make($input, $rules);
-        if ($validator->fails()) {
-            $this->setError($validator->errors());
-            return false;
-        }
-        return true;
+class User extends BaseService {
+    function __construct(\User $model, UserValidator $validator) {
+        $this->model = $model;
+        $this->validator = $validator;
     }
 
     function store($input) {
-        if (!$this->validate($input)) {
+        $validator = $this->validator->make($input);
+        if ($validator->fails()) {
+            $this->setError($validator->messages());
             return false;
         }
+        $hash = Hash::make($input['password']);
+        unset($input['password']);
+        unset($input['password_confirmation']);
 
-        $milestone = $this->buildPayload(new Milestone(), $input);
-        $result = $milestone->save();
+        $user = $this->buildPayload(new \User(), $input);
+        $user->password = $hash;
+        $result = $user->save();
         if (!$result) {
-            $this->setError($milestone->errors());
+            $this->setError($user->errors());
         }
-        return $milestone->id;
+        return $user->id;
     }
 
     function update($id, $input) {
         $hash = null;
-        if (!$this->validate($input,
-            array(
-                'password' => 'between:4,16|alpha_num|confirmed',
-                'password_confirmation' => 'between:4,16|alpha_num',
-                'email' => 'required|email',
-                'username' => 'required|alpha_dash',
-            )
-        )) {
+        $validator = $this->validator->existing()->make($input);
+        if ($validator->fails()) {
+            $this->setError($validator->messages());
             return false;
         }
         if (!empty($input['password'])) {
@@ -102,17 +93,22 @@ class MilestoneRepository extends BaseRepository {
         return $result;
     }
 
-    function buildPayload($payload, $input) {
-        $payload->name = $input['name'];
-        $payload->short = $input['short'];
-        $payload->text = $input['text'];
-        return $payload;
+    function buildPayload($user, $input) {
+        $user->first_name = $input['first_name'];
+        $user->last_name = $input['last_name'];
+        $user->username = $input['username'];
+        $user->email = $input['email'];
+        $user->user_type_id = $input['user_type_id'];
+        return $user;
     }
 
     function index($paginate = 0) {
+        $user = DB::table('users')
+            ->select('users.id', 'users.first_name', 'users.last_name', 'users.email', 'users.username', 'users.deleted_at', 'user_types.name as user_type_name', 'user_types.id as user_type_id')
+            ->leftJoin('user_types', 'users.user_type_id', '=', 'user_types.id');
         if ($paginate) {
-            return Milestone::paginate($paginate);
+            return $user->paginate($paginate);
         }
-        return Milestone::all();
+        return $user->get();
     }
 } 

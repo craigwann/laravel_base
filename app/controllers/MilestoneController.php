@@ -1,20 +1,22 @@
 <?php
 
+use Ironquest\Services;
+
 class MilestoneController extends \BaseController {
 
     function __construct(
-        MilestoneRepository $milestoneRepository,
-        AbilityRepository $abilityRepository,
-        AttributeModifierRepository $attributeModifierRepository,
-        TargetRepository $targetRepository,
-        AttunementRepository $attunementRepository
+        Ironquest\Services\Milestone $milestone,
+        Ironquest\Services\Ability $ability,
+        Ironquest\Services\AttributeModifier $attributeModifier,
+        Ironquest\Services\Target $target,
+        Ironquest\Services\Attunement $attunement
     )
     {
-        $this->milestone = $milestoneRepository;
-        $this->ability = $abilityRepository;
-        $this->attributeModifier = $attributeModifierRepository;
-        $this->target = $targetRepository;
-        $this->attunement = $attunementRepository;
+        $this->milestone = $milestone;
+        $this->ability = $ability;
+        $this->attributeModifier = $attributeModifier;
+        $this->target = $target;
+        $this->attunement = $attunement;
         $this->beforeFilter('access:' . Config::get('auth.userType.player'));
         parent::__construct();
     }
