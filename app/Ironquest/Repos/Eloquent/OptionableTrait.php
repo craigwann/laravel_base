@@ -1,4 +1,4 @@
-<?php namespace Ironquest\Repos;
+<?php namespace Ironquest\Repos\Eloquent;
 /**
  * Created by PhpStorm.
  * User: craig

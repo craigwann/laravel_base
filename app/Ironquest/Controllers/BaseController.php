@@ -1,4 +1,4 @@
-<?php
+<?php namespace Ironquest\Controllers;
 
 class BaseController extends Controller {
 
@@ -7,12 +7,12 @@ class BaseController extends Controller {
     function __construct() {
         $this->beforeFilter(function()
         {
-            Event::fire('clockwork.controller.start');
+            \Event::fire('clockwork.controller.start');
         });
 
         $this->afterFilter(function()
         {
-            Event::fire('clockwork.controller.end');
+            \Event::fire('clockwork.controller.end');
         });
     }
 	/**
@@ -24,12 +24,12 @@ class BaseController extends Controller {
 	{
 		if ( ! is_null($this->layout))
 		{
-			$this->layout = View::make($this->layout);
+			$this->layout = \View::make($this->layout);
 		}
 	}
 
     function message($header, $message) {
-        return View::make('message', array('header' => $header, 'message' => $message));
+        return \View::make('message', array('header' => $header, 'message' => $message));
     }
 
 }
