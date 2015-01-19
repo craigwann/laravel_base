@@ -10,7 +10,9 @@
         "ceesvanegmond/minify": "2.0.*",
         "chrisbjr/api-guard": "0.*",
 		"davejamesmiller/laravel-breadcrumbs": "~2.3.0",
-        "itsgoingd/clockwork": "dev-master"
+        "itsgoingd/clockwork": "dev-master",
+		"yhbyun/snowman": "dev-master",
+		"way/generators": "~2.0"
 	},
 	"autoload": {
 		"classmap": [

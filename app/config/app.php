@@ -127,6 +127,8 @@ return array(
         'Chrisbjr\ApiGuard\ApiGuardServiceProvider',
         'DaveJamesMiller\Breadcrumbs\ServiceProvider',
         'Clockwork\Support\Laravel\ClockworkServiceProvider',
+        'Way\Generators\GeneratorsServiceProvider',
+        'Yhbyun\Snowman\SnowmanServiceProvider'
 	),
 
 	/*

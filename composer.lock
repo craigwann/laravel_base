@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "c813eaea4cbea972b7c9f1e113c74ae1",
+    "hash": "51a690980ffc0133a5cf4eb089937c69",
     "packages": [
         {
             "name": "adamwathan/bootforms",
@@ -731,6 +731,60 @@
                 "rest"
             ],
             "time": "2014-07-06 16:48:26"
+        },
+        {
+            "name": "mccool/laravel-auto-presenter",
+            "version": "2.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ShawnMcCool/laravel-auto-presenter.git",
+                "reference": "79e1eab2528262e325419e9441967bd390c4b667"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ShawnMcCool/laravel-auto-presenter/zipball/79e1eab2528262e325419e9441967bd390c4b667",
+                "reference": "79e1eab2528262e325419e9441967bd390c4b667",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/events": "4.2.*",
+                "illuminate/pagination": "4.2.*",
+                "illuminate/support": "4.2.*",
+                "illuminate/view": "4.2.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.8",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "McCool\\LaravelAutoPresenter": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Graham Campbell",
+                    "email": "graham@mineuk.com"
+                },
+                {
+                    "name": "Shawn McCool",
+                    "email": "shawn@heybigname.com"
+                }
+            ],
+            "description": "A system for auto-decorating models with presenter objects.",
+            "keywords": [
+                "eloquent",
+                "laravel",
+                "lpm",
+                "presenter"
+            ],
+            "time": "2015-01-07 21:55:43"
         },
         {
             "name": "monolog/monolog",
@@ -2103,13 +2157,110 @@
                 "minifier"
             ],
             "time": "2014-11-11 03:54:14"
+        },
+        {
+            "name": "way/generators",
+            "version": "2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JeffreyWay/Laravel-4-Generators.git",
+                "reference": "484d379c6bc1d38c75e4f52f74efcbcd11f7dd2c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JeffreyWay/Laravel-4-Generators/zipball/484d379c6bc1d38c75e4f52f74efcbcd11f7dd2c",
+                "reference": "484d379c6bc1d38c75e4f52f74efcbcd11f7dd2c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~4.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "behat/behat": "~2.5.1",
+                "behat/mink": "~1.5.0",
+                "behat/mink-extension": "~1.2.0",
+                "behat/mink-goutte-driver": "~1.0.9",
+                "behat/mink-selenium2-driver": "~1.1.1",
+                "phpspec/phpspec": "~2.0",
+                "phpunit/phpunit": "~3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Way\\Generators": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@jeffrey-way.com",
+                    "homepage": "http://jeffrye-way.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Rapidly generate resources, migrations, models, and much more.",
+            "time": "2014-05-27 14:21:26"
+        },
+        {
+            "name": "yhbyun/snowman",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yhbyun/laravel-snowman.git",
+                "reference": "6c3c7a5ee11487156333846a4e8b36fb59c94d8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yhbyun/laravel-snowman/zipball/6c3c7a5ee11487156333846a4e8b36fb59c94d8a",
+                "reference": "6c3c7a5ee11487156333846a4e8b36fb59c94d8a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~4.0",
+                "mccool/laravel-auto-presenter": "2.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpmd/phpmd": "*",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Yhbyun\\Snowman\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "YongHun Byun",
+                    "email": "yonghunbyun@gmail.com"
+                }
+            ],
+            "description": "Laravel 4 Repository Pattern Generator",
+            "keywords": [
+                "generator",
+                "laravel",
+                "repository",
+                "scaffold"
+            ],
+            "time": "2014-10-29 11:44:02"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "itsgoingd/clockwork": 20
+        "itsgoingd/clockwork": 20,
+        "yhbyun/snowman": 20
     },
     "platform": [],
     "platform-dev": []

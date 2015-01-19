@@ -16,11 +16,6 @@ class Milestone extends BaseService {
     }
 
     function store($input) {
-        $validator = $this->validator->make($input);
-        if ($validator->fails()) {
-            $this->setError($validator->messages());
-            return false;
-        }
         $milestone = $this->buildPayload(new \Milestone(), $input);
         $result = $milestone->save();
         if (!$result) {
