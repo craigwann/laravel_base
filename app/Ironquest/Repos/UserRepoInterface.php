@@ -2,5 +2,5 @@
 
 interface UserRepoInterface extends BaseRepoInterface
 {
-
+    function revive($id);
 }

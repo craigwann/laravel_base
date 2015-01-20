@@ -2,16 +2,20 @@
 
 use Ironquest\Repos\UserRepoInterface as User;
 use Ironquest\Repos\UserTypeRepoInterface as UserType;
+use Ironquest\Validators\UserValidator as Validator;
+use Ironquest\Facades\Login as Login;
 
 class UserController extends BaseController {
 
     public function __construct(
         User $user,
-        UserType $userType
+        UserType $userType,
+        Validator $validator
     )
     {
         $this->user = $user;
         $this->userType = $userType;
+        $this->$validator = $validator;
 
         $this->beforeFilter('access:' . \Config::get('Auth.userType.manager'), array('except' => array('login', 'processLogin')));
         parent::__construct();
@@ -25,8 +29,7 @@ class UserController extends BaseController {
 	 */
 	public function index()
 	{
-        $users = $this->user->index(15);
-        return \View::make('user.index', array('users' => $users));
+        return \View::make('user.index', array('users' => $this->user->allPaginated()));
 	}
 
 	/**
@@ -48,12 +51,18 @@ class UserController extends BaseController {
 	 */
 	public function store()
 	{
-        $result = $this->user->store(\Input::all());
-        if (!$result) {
-            return \Redirect::route('users.create')->withInput()->withErrors($this->user->errors());
-        } else {
-            return \Redirect::route('users.edit', array($result))->with('message', 'User created!')->with('context', 'success');
+        $validator = $this->validator->make(Input::all());
+        if ($validator->fails()) {
+            return \Redirect::route('users.create')->withInput()->withErrors($validator->messages());
         }
+
+        try {
+            $result = $this->milestone->create(Input::all());
+        } catch (\Exception $e) {
+            return \Redirect::route('users.create')->with('message', 'An error has occured.')->with('context', 'danger');
+        }
+
+        return \Redirect::route('users.edit', array($result))->with('message', 'User created!')->with('context', 'success');
 	}
 
 	/**
@@ -77,15 +86,12 @@ class UserController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        $user = $this->user->withTrashed()->find($id);
+        $user = $this->user->find($id, 'userType');
         if (!$user) {
             return $this->message('No user found', $this->not_found_message);
         }
-        $data = $user->with('userType')->first();
 
-        $data['userTypeOptions'] = $this->userType->listOptions('level');
-
-        return \View::make('user.edit', $data)->with('user', $user);
+        return \View::make('user.edit', $data)->with('user', $user)->with('userTypeOptions', $this->userType->listOptions('level'));
 	}
 
 	/**
@@ -97,12 +103,16 @@ class UserController extends BaseController {
 	 */
 	public function update($id)
 	{
-        $result = $this->user->update($id, \Input::all());
-        if (!$result) {
-            return \Redirect::route('users.edit', array($id))->withInput()->withErrors($this->user->errors());
-        } else {
-            return \Redirect::route('users.edit', array($id))->with('message', 'User updated!')->with('context', 'success');
+        $validator = $this->validator->existing()->make(Input::all());
+        if ($validator->fails()) {
+            return \Redirect::route('users.edit')->withInput()->withErrors($validator->messages());
         }
+        try {
+            $this->user->update($id, \Input::all());
+        } catch (\Exception $e) {
+            return \Redirect::route('users.edit')->with('message', 'An error has occurred.')->with('context', 'danger');
+        }
+        return \Redirect::route('users.edit', array($id))->with('message', 'User Updated!')->with('context', 'success');
 	}
 
 	/**
@@ -114,22 +124,22 @@ class UserController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-        $result = $this->user->destroy($id);
-        if (!$result) {
-            return \Redirect::route('users.edit', array($id))->with('danger', 'Error deactivating user!')->with('context', 'danger');
-        } else {
-            return \Redirect::route('users.edit', array($id))->with('message', 'User deactivated!')->with('context', 'success');
+        try {
+            $this->milestone->delete($id);
+        } catch (\Exception $e) {
+            return \Redirect::route('users.edit', array($id))->with('message', 'Error deleting user!')->with('context', 'danger');
         }
+        return \Redirect::route('users')->with('message', 'user deleted!')->with('context', 'success');
 	}
 
     public function revive($id)
     {
-        $result = $this->user->revive($id);
-        if (!$result) {
-            return \Redirect::route('users.edit', array($id))->with('danger', 'Error reviving user!')->with('context', 'danger');
-        } else {
-            return \Redirect::route('users.edit', array($id))->with('message', 'User revived!')->with('context', 'success');
+        try {
+            $this->milestone->revive($id);
+        } catch (\Exception $e) {
+            return \Redirect::route('users.edit', array($id))->with('message', 'Error reviving user!')->with('context', 'danger');
         }
+        return \Redirect::route('users')->with('message', 'user revived!')->with('context', 'success');
     }
 
     function login() {
@@ -137,32 +147,7 @@ class UserController extends BaseController {
     }
 
     function processLogin() {
-        $rules = array(
-            'username' => 'required',
-            'password' => 'required|between:4,16|alpha_num'
-        );
-
-        $validator = Validator::make(\Input::all(), $rules);
-
-        if ($validator->fails()) {
-            return \Redirect::to('login')
-                ->withErrors($validator)
-                ->withInput(\Input::except('password'));
-        }
-
-        $userData = array(
-            'password' 	=> \Input::get('password')
-        );
-
-        if (str_contains(\Input::get('username'), '@') &&
-            str_contains(\Input::get('username'), '.')) {
-            //Logging in with email instead of username
-            $userData['email'] = \Input::get('username');
-        } else {
-            $userData['username'] = \Input::get('username');
-        }
-
-        if (\Auth::attempt($userData)) {
+        if (Login::attempt(\Input::all())) {
             return \Redirect::route('dashboard')->with('message', 'Welcome, ' . \Auth::user()->username . '!')->with('context', 'success');
         } else {
             return \Redirect::route('login')->with('message', 'Incorrect username or password.')->with('context', 'danger');
@@ -170,7 +155,7 @@ class UserController extends BaseController {
     }
 
     function logout() {
-        \Auth::logout();
+        Login::logout();
         return \Redirect::route('login')->with('message', 'Logged out.')->with('context', 'success');
     }
 }

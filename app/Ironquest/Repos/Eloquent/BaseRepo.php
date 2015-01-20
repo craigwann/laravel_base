@@ -57,6 +57,17 @@ abstract class BaseRepo implements BaseRepoInterface
     }
 
     /**
+     * Retrieve all entities paginated
+     *
+     * @param array $with
+     * @param int $paginateBy
+     * @return mixed
+     */
+    public function allPaginated(array $with = array(), $paginateBy = 15) {
+        return $this->make($with)->paginate($paginateBy)->get();
+    }
+
+    /**
      * Find a single entity
      *
      * composite primary key인 경우 $id는 array
@@ -90,6 +101,21 @@ abstract class BaseRepo implements BaseRepoInterface
     public function getBy($key, $value, array $with = array())
     {
         return $this->make($with)->where($key, '=', $value)->get();
+    }
+
+    /**
+     * Search for many results by key and value
+     * Returns paginated result
+     *
+     * @param $key
+     * @param $value
+     * @param array $with
+     * @param int $paginateBy
+     * @return mixed
+     */
+    public function getByPaginated($key, $value, array $with = array(), $paginateBy = 15)
+    {
+        return $this->make($with)->where($key, '=', $value)->paginate($paginateBy)->get();
     }
 
     public function create(array $input)

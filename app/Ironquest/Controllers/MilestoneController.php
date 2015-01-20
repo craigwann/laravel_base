@@ -35,7 +35,7 @@ class MilestoneController extends BaseController {
 	 */
 	public function index()
 	{
-        return \View::make('milestone.index', array('milestones' => $this->milestone->all()));
+        return \View::make('milestone.index', array('milestones' => $this->milestone->allPaginated()));
 	}
 
 	/**

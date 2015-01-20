@@ -37,4 +37,11 @@ class UserValidator extends ValidatorBase {
         ));
         return $this;
     }
+
+    function validateLogin($data) {
+        return $this->make($data, array(
+            'username' => 'required',
+            'password' => 'required|between:4,16|alpha_num'
+        ));
+    }
 } 
