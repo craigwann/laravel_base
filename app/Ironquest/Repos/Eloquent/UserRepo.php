@@ -5,6 +5,8 @@ use Ironquest\Repos\UserRepoInterface;
 
 class UserRepo extends BaseRepo implements UserRepoInterface
 {
+    use PaginatableTrait;
+
     public function __construct(User $user)
     {
         parent::__construct($user);

@@ -35,8 +35,7 @@ class MilestoneController extends BaseController {
 	 */
 	public function index()
 	{
-        $milestones = $this->milestone->index(15);
-        return \View::make('milestone.index', array('milestones' => $milestones));
+        return \View::make('milestone.index', array('milestones' => $this->milestone->all()));
 	}
 
 	/**
@@ -65,7 +64,6 @@ class MilestoneController extends BaseController {
 	public function store()
 	{
         $validator = $this->validator->make(Input::all());
-
         if ($validator->fails()) {
             return \Redirect::route('milestones.create')->withInput()->withErrors($validator->messages());
         }
@@ -100,15 +98,12 @@ class MilestoneController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        $milestone = $this->milestone->withTrashed()->find($id);
+        $milestone = $this->milestone->find($id);
         if (!$milestone) {
             return $this->message('No milestone found', $this->not_found_message);
         }
-        $data = $milestone->with('milestoneType')->first();
 
-        $data['milestoneTypeOptions'] = $this->milestoneType->listOptions();
-
-        return \View::make('milestone.edit', $data)->with('milestone', $milestone);
+        return \View::make('milestone.edit', $milestone);
 	}
 
 	/**
@@ -127,7 +122,7 @@ class MilestoneController extends BaseController {
         try {
             $result = $this->milestone->update($id, \Input::all());
         } catch (\Exception $e) {
-            return \Redirect::route('milestones.edit')->with('message', 'An error has occured.')->with('context', 'danger');
+            return \Redirect::route('milestones.edit')->with('message', 'An error has occurred.')->with('context', 'danger');
         }
         return \Redirect::route('milestones.edit', array($id))->with('message', 'milestone Updated!')->with('context', 'success');
 	}
@@ -142,20 +137,10 @@ class MilestoneController extends BaseController {
 	public function destroy($id)
 	{
         try {
-            $result = $this->milestone->destroy($id);
+            $result = $this->milestone->delete($id);
         } catch (\Exception $e) {
             return \Redirect::route('milestones.edit', array($id))->with('message', 'Error deleting milestone!')->with('context', 'danger');
         }
         return \Redirect::route('milestones')->with('message', 'milestone deleted!')->with('context', 'success');
 	}
-
-    public function revive($id)
-    {
-        try {
-            $result = $this->milestone->revive($id);
-        } catch (\Exception $e) {
-            return \Redirect::route('milestones')->with('message', 'Error reviving milestone!')->with('context', 'danger');
-        }
-        return \Redirect::route('milestones.edit', array($id))->with('message', 'milestone revived!')->with('context', 'success');
-    }
 }
