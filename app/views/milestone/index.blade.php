@@ -25,7 +25,7 @@
             @endforeach
         </table>
         <div class="text-center">
-            <?php echo $milestones->links(); ?>
+            <?php echo $milestones->links() ?>
         </div>
 @endsection
 

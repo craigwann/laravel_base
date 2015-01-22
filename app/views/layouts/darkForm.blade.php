@@ -15,7 +15,7 @@
 </div>
 @endif
 
-@yield('content');
+@yield('content')
 
 @include('elements.footer')
 

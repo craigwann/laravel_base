@@ -32,8 +32,7 @@
             </div>
 
             <div class="row">
-
-               {{ BootForm::open()->put()->attribute('class', 'col-sm-8 col-sm-offset-2')->action('/users/' . $user->id . '/') }}
+               {{ BootForm::open()->put()->attribute('class', 'col-sm-8 col-sm-offset-2')->action('/users/' . $user->id) }}
                     {{ Bootform::bind($user) }}
                     @include('user.form')
 

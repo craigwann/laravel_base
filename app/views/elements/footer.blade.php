@@ -12,7 +12,7 @@
             <li><a href="#link"><i class="fa fa-linkedin fa-fw"></i></a></li>
         </ul>-->
         <hr />
-        <p>&copy; {{ date("Y") }}, IronQuest by Admonishing Ray.</p>
+        <p>&copy {{ date("Y") }}, IronQuest by Admonishing Ray.</p>
 
     </div>
 

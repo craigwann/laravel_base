@@ -29,10 +29,9 @@ Route::group(array('namespace' => 'Ironquest\Controllers'), function()
     Route::get('/login', array('as' => 'user.login', 'uses' => 'UserController@login'));
     Route::post('/login', array('as' => 'users.processLogin', 'uses' => 'UserController@processLogin'));
     Route::get('/logout', array('as' => 'users.logout', 'uses' => 'UserController@logout'));
-    Route::get('users/destroy/{id}', array('as' => 'user.destroy', 'uses' => 'UserController@destroy'));
-    Route::get('users/revive/{id}', array('as' => 'user.revive', 'uses' =>'UserController@revive'));
+    Route::get('/users/destroy/{id}', array('as' => 'user.destroy', 'uses' => 'UserController@destroy'));
+    Route::get('/users/revive/{id}', array('as' => 'user.revive', 'uses' =>'UserController@revive'));
     Route::resource('users', 'UserController');
-
     Route::get('/denied', array('as' => 'denied', function()
     {
         return View::make('denied');
