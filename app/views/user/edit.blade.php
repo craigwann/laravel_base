@@ -13,11 +13,11 @@
                     <ul class="nav navmenu-nav">
                         @if($user->deleted_at)
                         <li>
-                            <a class="bootbox-confirm" href="{{ action('UserController@revive', array($user->id)) }}"><i class="fa fa-life-ring"></i> Revive</a>
+                            <a class="bootbox-confirm" href="{{ route('users.revive', array($user->id)) }}"><i class="fa fa-life-ring"></i> Revive</a>
                         </li>
                         @else
                         <li>
-                            <a class="bootbox-confirm" href="{{ action('UserController@destroy', array($user->id)) }}"><i class="fa fa-remove"></i> Destroy</a>
+                            <a class="bootbox-confirm" href="{{ route('users.destroy', array($user->id)) }}"><i class="fa fa-remove"></i> Destroy</a>
                         </li>
                         @endif
                     </ul>

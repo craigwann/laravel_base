@@ -14,8 +14,7 @@ trait OptionableTrait {
     protected $database = 'ironquest';
 
     function listOptions($orderBy = 'id', $format = array('id' => 'name')) {
-        $model = new $this->modelName();
-        $data = $model->orderBy($orderBy)->get()->toArray();
+        $data = $this->model->orderBy($orderBy)->get()->toArray();
         $result = [];
         foreach($data as $row) {
             $result[$row[key($format)]] = $row[$format[key($format)]];
@@ -24,8 +23,7 @@ trait OptionableTrait {
     }
 
     function listColumnOptions() {
-        $model = new $this->modelName();
-        $columns = $model->getConnection()->getSchemaBuilder()->getColumnListing($model->getTable());
+        $columns = $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());
 
         $result = [];
         foreach($columns as $column) {

@@ -9,7 +9,7 @@
 namespace Ironquest\Repos\Eloquent;
 
 
-class ReviveableTrait {
+trait ReviveableTrait {
 
     /**
      * Undelete a record from a soft deleting model.

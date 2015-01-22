@@ -1,6 +1,6 @@
 <?php namespace Ironquest\Controllers;
 
-class BaseController extends Controller {
+class BaseController extends \Controller {
 
     protected $not_found_message = "You must have failed your perception check.";
 

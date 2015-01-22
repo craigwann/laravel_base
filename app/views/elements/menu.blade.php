@@ -26,10 +26,10 @@
                 </li>
             @else
                 <li>
-                   <a href="{{ action('DashboardController@show') }}"><i class="fa fa-user"></i> {{Auth::user()->username}}</a>
+                   <a href="{{ route('dashboard.show') }}"><i class="fa fa-user"></i> {{Auth::user()->username}}</a>
                 </li>
                 <li>
-                    <a href="{{ action('UserController@logout') }}"><i class="fa fa-sign-out"></i> Logout</a>
+                    <a href="{{ route('users.logout') }}"><i class="fa fa-sign-out"></i> Logout</a>
                 </li>
             @endif
             </ul>

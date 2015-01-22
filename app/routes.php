@@ -11,44 +11,30 @@
 |
 */
 
-//HOME
-Route::get('/', 'HomeController@show');
-
-//DASHBOARD
-Route::get('/dashboard', array('as' => 'dashboard', 'uses' => 'DashboardController@show'));
-
-//DIRECTORY
-Route::get('/rules', array('as' => 'rules', 'uses' => 'DirectoryController@show'));
-
-//MILESTONES
-Route::resource('milestones', 'MilestoneController');
-
-//USER
-Route::get('/login', array('as' => 'login', 'uses' => 'UserController@login'));
-Route::post('/login', 'UserController@processLogin');
-Route::get('/logout', 'UserController@logout');
-Route::get('users/destroy/{id}', 'UserController@destroy');
-Route::get('users/revive/{id}', 'UserController@revive');
-Route::resource('users', 'UserController');
-
-Route::get('/denied', array('as' => 'denied', function()
+Route::group(array('namespace' => 'Ironquest\Controllers'), function()
 {
-    return View::make('denied');
-}));
+    //HOME
+    Route::get('/', array('as' => 'home.index', 'uses' => 'HomeController@show'));
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-*/
+    //DASHBOARD
+    Route::get('/dashboard', array('as' => 'dashboard.show', 'uses' => 'DashboardController@show'));
 
-//MILESTONE
-Route::get('api/v1/milestones', 'api\v1\MilestoneApiController@index');
-Route::get('api/v1/milestones/{id}', 'api\v1\MilestoneApiController@show');
+    //DIRECTORY
+    Route::get('/rules', array('as' => 'directory.show', 'uses' => 'DirectoryController@show'));
 
-//USER
-Route::get('api/v1/users', 'api\v1\UserApiController@index');
-Route::get('api/v1/users/{id}', 'api\v1\UserApiController@show');
-Route::post('api/v1/users/{id}', 'api\v1\UserApiController@authenticate');
-Route::put('api/v1/users/{id}', 'api\v1\UserApiController@deauthenticate');
+    //MILESTONES
+    Route::resource('milestones', 'MilestoneController');
+
+    //USER
+    Route::get('/login', array('as' => 'user.login', 'uses' => 'UserController@login'));
+    Route::post('/login', array('as' => 'users.processLogin', 'uses' => 'UserController@processLogin'));
+    Route::get('/logout', array('as' => 'users.logout', 'uses' => 'UserController@logout'));
+    Route::get('users/destroy/{id}', array('as' => 'user.destroy', 'uses' => 'UserController@destroy'));
+    Route::get('users/revive/{id}', array('as' => 'user.revive', 'uses' =>'UserController@revive'));
+    Route::resource('users', 'UserController');
+
+    Route::get('/denied', array('as' => 'denied', function()
+    {
+        return View::make('denied');
+    }));
+});

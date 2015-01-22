@@ -10,25 +10,19 @@
 |
 */
 
-define('kAdminLevel', 10);
-define('kManagerLevel', 9);
-define('kModeratorLevel', 6);
-define('kGameMasterLevel', 2);
-define('kPlayerLevel', 3);
-
 return array(
 
     'userType' => array(
 
-        'admin' => kAdminLevel,
+        'admin' => 10,
 
-        'manager' => kManagerLevel,
+        'manager' => 9,
 
-        'moderator' => kModeratorLevel,
+        'moderator' => 6,
 
-        'gameMaster' => kGameMasterLevel,
+        'gameMaster' => 2,
 
-        'player' => kPlayerLevel
+        'player' => 3
     ),
 
 	/*

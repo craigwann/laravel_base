@@ -12,7 +12,7 @@
             <th>Username</th>
             <th>Type</th>
             <th>Subscription</th>
-            <th><a href="{{ URL::action('UserController@create') }}"><i class="fa fa-plus"></i></a></th>
+            <th><a href="{{ URL::route('users.create') }}"><i class="fa fa-plus"></i></a></th>
         </tr>
         @foreach ($users as $user)
             <tr @if ($user->deleted_at) class="danger rowlink" @else class="rowlink" @endif data-link="row">
@@ -21,7 +21,7 @@
                 <td>{{ $user->username }}</td>
                 <td>{{ $user->user_type_name }}</td>
                 <td></td>
-                <td><a href="{{ URL::action('UserController@edit', array($user->id)) }}"><i class="fa fa-edit"></i></a></td>
+                <td><a href="{{ URL::route('users.edit', array($user->id)) }}"><i class="fa fa-edit"></i></a></td>
             </tr>
         @endforeach
     </table>

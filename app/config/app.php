@@ -121,6 +121,8 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+        'Ironquest\Providers\RepoServiceProvider',
+        'Ironquest\Providers\LoginServiceProvider',
         'AdamWathan\BootForms\BootFormsServiceProvider',
         'CeesVanEgmond\Minify\MinifyServiceProvider',
         'EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider',
@@ -128,7 +130,7 @@ return array(
         'DaveJamesMiller\Breadcrumbs\ServiceProvider',
         'Clockwork\Support\Laravel\ClockworkServiceProvider',
         'Way\Generators\GeneratorsServiceProvider',
-        'Yhbyun\Snowman\SnowmanServiceProvider'
+        'Yhbyun\Snowman\SnowmanServiceProvider',
 	),
 
 	/*

@@ -64,7 +64,7 @@ abstract class BaseRepo implements BaseRepoInterface
      * @return mixed
      */
     public function allPaginated(array $with = array(), $paginateBy = 15) {
-        return $this->make($with)->paginate($paginateBy)->get();
+        return $this->make($with)->paginate($paginateBy);
     }
 
     /**
@@ -115,7 +115,7 @@ abstract class BaseRepo implements BaseRepoInterface
      */
     public function getByPaginated($key, $value, array $with = array(), $paginateBy = 15)
     {
-        return $this->make($with)->where($key, '=', $value)->paginate($paginateBy)->get();
+        return $this->make($with)->where($key, '=', $value)->paginate($paginateBy);
     }
 
     public function create(array $input)

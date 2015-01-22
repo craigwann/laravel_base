@@ -24,10 +24,12 @@
 			"app/database/migrations",
 			"app/database/seeds",
             "app/services",
-            "app/Validators",
 			"app/tests/TestCase.php",
             "app/transformers"
-		]
+		],
+        "psr-4": {
+            "Ironquest\\": "app/Ironquest"
+        }
 	},
 	"scripts": {
 		"post-install-cmd": [
