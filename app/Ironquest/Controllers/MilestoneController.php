@@ -11,7 +11,7 @@ class MilestoneController extends BaseController {
 
     public function __construct(
         Milestone $milestone,
-        AttributeModifier $AttributeModifier,
+        AttributeModifier $attributeModifier,
         Target $target,
         Range $range,
         Attunement $attunement,
@@ -19,7 +19,7 @@ class MilestoneController extends BaseController {
     )
     {
         $this->milestone = $milestone;
-        $this->attributeModifier = $AttributeModifier;
+        $this->attributeModifier = $attributeModifier;
         $this->target = $target;
         $this->range = $range;
         $this->attunement = $attunement;

@@ -16,7 +16,8 @@ class MilestoneValidator extends ValidatorBase {
     protected $rules = array(
         'name' => 'required',
         'short' => 'required|max:256',
-        'text' => 'required'
+        'text' => 'required',
+        'ability_short' => 'required|max:256',
      );
 
     /**
