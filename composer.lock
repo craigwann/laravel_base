@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "51a690980ffc0133a5cf4eb089937c69",
+    "hash": "19dbd30d50e48b3cc474f1c3ca10964b",
     "packages": [
         {
             "name": "adamwathan/bootforms",
@@ -471,12 +471,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/itsgoingd/clockwork.git",
-                "reference": "475bc70af1ca24f54963cd613368063950e95885"
+                "reference": "0edd224109f00142f4b7f524809e04b4cc23673a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itsgoingd/clockwork/zipball/475bc70af1ca24f54963cd613368063950e95885",
-                "reference": "475bc70af1ca24f54963cd613368063950e95885",
+                "url": "https://api.github.com/repos/itsgoingd/clockwork/zipball/0edd224109f00142f4b7f524809e04b4cc23673a",
+                "reference": "0edd224109f00142f4b7f524809e04b4cc23673a",
                 "shasum": ""
             },
             "require": {
@@ -508,7 +508,7 @@
                 "logging",
                 "profiling"
             ],
-            "time": "2014-12-23 21:11:34"
+            "time": "2015-01-16 14:21:52"
         },
         {
             "name": "jeremeamia/SuperClosure",

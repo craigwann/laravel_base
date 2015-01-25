@@ -11,6 +11,12 @@ class Milestone extends Model implements PresenterInterface
 
     protected $fillable = [];
 
+    protected $guarded = array('id');
+
+    public function ability() {
+        return $this->hasOne('Ironquest\Ability', 'id', 'ability_id');
+    }
+
     public function getPresenter()
     {
         return 'Ironquest\Presenters\MilestonePresenter';

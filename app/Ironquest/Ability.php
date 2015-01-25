@@ -11,6 +11,8 @@ class Ability extends Model implements PresenterInterface
 
     protected $fillable = [];
 
+
+
     public function getPresenter()
     {
         return 'Ironquest\Presenters\AbilityPresenter';

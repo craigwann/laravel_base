@@ -84,7 +84,7 @@ Auth::extend('ironQuestAuth', function()
 {
     $hasher = App::make('hash');
     return new ironQuestGuard(
-        new Illuminate\Auth\EloquentUserProvider($hasher, 'User'),
+        new Illuminate\Auth\EloquentUserProvider($hasher, 'Ironquest\User'),
         App::make('session.store')
     );
 });
