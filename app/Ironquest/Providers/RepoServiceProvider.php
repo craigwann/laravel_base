@@ -12,6 +12,11 @@ class RepoServiceProvider extends ServiceProvider
      * @return void
      */
     public function register() {
+        $this->app->bind('\Ironquest\Repos\RangeRepoInterface', function()
+        {
+            return new Ironquest\Repos\Eloquent\RangeRepo(new Ironquest\Range());
+        });
+
         $this->app->bind('\Ironquest\Repos\AbilityRepoInterface', function()
         {
             return new Ironquest\Repos\Eloquent\AbilityRepo(new Ironquest\Ability());

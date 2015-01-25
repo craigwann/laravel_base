@@ -3,6 +3,7 @@
 use Ironquest\Repos\MilestoneRepoInterface as Milestone;
 use Ironquest\Repos\AttributeModifierRepoInterface as AttributeModifier;
 use Ironquest\Repos\TargetRepoInterface as Target;
+use Ironquest\Repos\RangeRepoInterface as Range;
 use Ironquest\Repos\AttunementRepoInterface as Attunement;
 use Ironquest\Validators\MilestoneValidator as Validator;
 
@@ -12,13 +13,15 @@ class MilestoneController extends BaseController {
         Milestone $milestone,
         AttributeModifier $AttributeModifier,
         Target $target,
+        Range $range,
         Attunement $attunement,
         Validator $validator
     )
     {
         $this->milestone = $milestone;
-        $this->attributemodifier = $AttributeModifier;
+        $this->attributeModifier = $AttributeModifier;
         $this->target = $target;
+        $this->range = $range;
         $this->attunement = $attunement;
         $this->validator = $validator;
 
@@ -50,7 +53,8 @@ class MilestoneController extends BaseController {
             array(
                 'attributeModifierOptions' => $this->attributeModifier->listColumnOptions(),
                 'targetOptions' => $this->target->listOptions(),
-                'attunementOptions' => $this->attunement->listOptions()
+                'attunementOptions' => $this->attunement->listOptions(),
+                'rangeOptions' => $this->range->listOptions()
             )
         );
 	}

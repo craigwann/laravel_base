@@ -30,6 +30,10 @@ form .form-control {
     font-weight:300;
 }
 
+form  select[multiple].form-control {
+    height: auto;
+}
+
 form .form-group{
     position:relative;
 }
