@@ -118,18 +118,48 @@ abstract class BaseRepo implements BaseRepoInterface
         return $this->make($with)->where($key, '=', $value)->paginate($paginateBy);
     }
 
+    /**
+     * Create a record.
+     *
+     * @param array $input
+     * @return static
+     */
     public function create(array $input)
     {
         return $this->model->create($input);
     }
 
+    /**
+     * Update a record.
+     *
+     * @param $id
+     * @param array $input
+     * @return bool|int
+     */
     public function update($id, array $input)
     {
         return $this->model->find($id)->update($input);
     }
 
+    /**
+     * Delete a record.
+     *
+     * @param $id
+     * @return bool|null
+     * @throws \Exception
+     */
     public function delete($id)
     {
         return $this->model->find($id)->delete();
+    }
+
+    /**
+     * Get the ID of the last saved record.
+     *
+     * @return mixed
+     */
+    public function getLastId()
+    {
+        return $this->model->id;
     }
 }

@@ -1,4 +1,4 @@
-<?php namespace Ironquest\Services;
+<?php namespace Ironquest\Services\User;
 
 use Ironquest\Validators\UserValidator as Validator;
 
