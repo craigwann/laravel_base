@@ -13,7 +13,12 @@ class SeedAttunementsTable extends Migration {
 	public function up()
 	{
         DB::table('attunements')->insert(array(
-            array('name' => 'Fire')
+            array('name' => 'Air'),
+            array('name' => 'Death'),
+            array('name' => 'Earth'),
+            array('name' => 'Fire'),
+            array('name' => 'Ice'),
+            array('name' => 'Life'),
         ));
 	}
 
