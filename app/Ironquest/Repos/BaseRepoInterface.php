@@ -17,4 +17,6 @@ interface BaseRepoInterface
     public function update($id, array $input);
 
     public function delete($id);
+
+    public function getLastId();
 }

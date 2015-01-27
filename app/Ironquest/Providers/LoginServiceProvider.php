@@ -2,7 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 use Ironquest\Validators\UserValidator;
-use Ironquest\Services\Login;
+use Ironquest\Services\User\Login;
 
 class LoginServiceProvider extends ServiceProvider
 {
