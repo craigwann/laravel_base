@@ -6,6 +6,8 @@
  * Time: 11:02 PM
  */
 
+use \Validator as Validator;
+
 class MilestoneValidator extends ValidatorBase {
 
     /**
@@ -17,15 +19,9 @@ class MilestoneValidator extends ValidatorBase {
         'name' => 'required',
         'short' => 'required|max:256',
         'text' => 'required',
-        'ability_short' => 'required|max:256',
+        'ability_short' => 'required_with:rewards_ability|max:256',
+        'targets' => 'required_with:rewards_ability|array',
+        'ranges' => 'required_with:rewards_ability|array',
+        'attunements' => 'array'
      );
-
-    /**
-     * This record exists so we'll merge in some additional rules.
-     *
-     * @return $this
-     */
-    function existing() {
-        return $this;
-    }
 } 

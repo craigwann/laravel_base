@@ -7,10 +7,12 @@
 namespace Ironquest\Services;
 
 abstract class ServiceBase {
+    protected $errors;
+
     /**
      * Get Errors
      *
-     * @return Illuminate\Support\MessageBag
+     * @return \Illuminate\Support\MessageBag
      */
     public function errors()
     {
@@ -20,28 +22,9 @@ abstract class ServiceBase {
     /**
      * Set errors.
      *
-     * @param Illuminate\Support\MessageBag $errors
+     * @param \Illuminate\Support\MessageBag $errors
      */
-    public function setErrors(Illuminate\Support\MessageBag $errors) {
-        $this->setErrors($errors);
+    public function setErrors(\Illuminate\Support\MessageBag $errors) {
+        $this->errors = $errors;
     }
-
-    /**
-     * Get the message.
-     *
-     * @return mixed
-     */
-    public function message() {
-        return $this->message;
-    }
-
-    /**
-     * Set a message.
-     * 
-     * @param $message
-     */
-    public function setMessage($message) {
-        $this->message = $message;
-    }
-
 } 

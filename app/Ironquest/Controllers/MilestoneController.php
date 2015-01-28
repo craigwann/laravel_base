@@ -45,7 +45,7 @@ class MilestoneController extends BaseController {
 	public function store()
 	{
         if (!$result = $this->milestone->create(Input::all())) {
-            return Redirect::route('milestones.create')->withInput()->withErrors($this->milestone->getErrors());
+            return Redirect::route('milestones.create')->withInput()->withErrors($this->milestone->errors());
         }
 
         return Redirect::route('milestones.edit', array($result));
@@ -90,7 +90,7 @@ class MilestoneController extends BaseController {
 	public function update($id)
 	{
         if (!$result = $this->milestone->update(Input::all())) {
-            return Redirect::route('milestones.edit')->withInput()->withErrors($this->milestone->getErrors());
+            return Redirect::route('milestones.edit')->withInput()->withErrors($this->milestone->errors());
         }
 
         return Redirect::route('milestones.edit', array($result));
