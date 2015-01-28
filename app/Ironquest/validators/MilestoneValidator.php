@@ -7,6 +7,7 @@
  */
 
 use \Validator as Validator;
+use Illuminate\Support\MessageBag;
 
 class MilestoneValidator extends ValidatorBase {
 
@@ -24,4 +25,27 @@ class MilestoneValidator extends ValidatorBase {
         'ranges' => 'required_with:rewards_ability|array',
         'attunements' => 'array'
      );
+
+
+    /**
+     * @param $input
+     * @return \Illuminate\Support\MessageBag
+     */
+    function addAttributeValidationErrors($input, $validator)
+    {
+        $messageBag = new MessageBag();
+        if (!empty($input['rewards_attribute'])){
+            foreach($input['attribute'] as $attribute) {
+                if ($attribute == '') {
+                    $messageBag->add('attribute[]', 'required.');
+                }
+            }
+            foreach($input['attribute_modifier'] as $attribute) {
+                if ($attribute == '') {
+                    $messageBag->add('attribute_modifier[]', 'required.');
+                }
+            }
+        }
+        return new MessageBag(array_merge_recursive($validator->messages()->toArray(), $messageBag->toArray()));
+    }
 } 

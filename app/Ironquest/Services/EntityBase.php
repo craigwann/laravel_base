@@ -29,7 +29,7 @@ abstract class EntityBase extends ServiceBase {
         }
 
         try {
-            $this->repository->update($data);
+            $this->repository->create($data);
         } catch (Exception $e) {
             Session::flash('message', array('message' => $this->errorFlashMessage, 'context' => 'danger'));
             return false;

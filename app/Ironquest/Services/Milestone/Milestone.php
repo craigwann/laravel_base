@@ -34,4 +34,56 @@ class Milestone extends EntityBase {
             'rangeOptions' => App::make('Ironquest\Repos\RangeRepoInterface')->listOptions()
         );
     }
+
+    /**
+     * Create
+     *
+     * @param array $data
+     * @return boolean
+     */
+    public function create(array $data)
+    {
+        $validator = $this->validator->make($data);
+        $errors = $this->validator->addAttributeValidationErrors($data, $validator);
+        if ($errors->count()) {
+            $this->setErrors($errors);
+            return false;
+        }
+
+        try {
+            $this->repository->create($data);
+        } catch (Exception $e) {
+            Session::flash('message', array('message' => $this->errorFlashMessage, 'context' => 'danger'));
+            return false;
+        }
+
+        Session::flash('message', array('message' => ucfirst($this->name) . ' created!', 'context' => 'success'));
+        return $this->repository->getLastId();
+    }
+
+    /**
+     * Update
+     *
+     * @param array $data
+     * @return boolean
+     */
+    public function update(array $data)
+    {
+        $validator = $this->validator->existing()->make($data);
+        $errors = $this->validator->addAttributeValidationErrors($data, $validator);
+        if ($errors->count()) {
+            $this->setErrors($errors);
+            return false;
+        }
+
+        try {
+            $this->repository->update($data);
+        } catch (Exception $e) {
+            Session::flash('message', array('message' => $this->errorFlashMessage, 'context' => 'danger'));
+            return false;
+        }
+
+        Session::flash('message', array('message' => ucfirst($this->name) . ' updated!', 'context' => 'success'));
+        return $this->repository->getLastId();
+    }
 } 
