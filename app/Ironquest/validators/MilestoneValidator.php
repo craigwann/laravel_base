@@ -21,31 +21,31 @@ class MilestoneValidator extends ValidatorBase {
         'short' => 'required|max:256',
         'text' => 'required',
         'ability_short' => 'required_with:rewards_ability|max:256',
-        'targets' => 'required_with:rewards_ability|array',
-        'ranges' => 'required_with:rewards_ability|array',
-        'attunements' => 'array'
+        'targets' => 'required_with:rewards_ability',
+        'ranges' => 'required_with:rewards_ability'
      );
 
 
     /**
-     * @param $input
+     * Manual validation logic. Fired on validate and merged with validator messages.
+     *
+     * @param array $input
      * @return \Illuminate\Support\MessageBag
      */
-    function addAttributeValidationErrors($input, $validator)
-    {
+    function manualValidation(array $input) {
         $messageBag = new MessageBag();
-        if (!empty($input['rewards_attribute'])){
-            foreach($input['attribute'] as $attribute) {
-                if ($attribute == '') {
-                    $messageBag->add('attribute[]', 'required.');
-                }
-            }
-            foreach($input['attribute_modifier'] as $attribute) {
-                if ($attribute == '') {
-                    $messageBag->add('attribute_modifier[]', 'required.');
-                }
+        if (empty($input['rewards_attribute'])) return $messageBag;
+
+        foreach($input['attribute'] as $attribute) {
+            if ($attribute == '') {
+                $messageBag->add('attribute[]', 'required.');
             }
         }
-        return new MessageBag(array_merge_recursive($validator->messages()->toArray(), $messageBag->toArray()));
+        foreach($input['attribute_modifier'] as $attribute) {
+            if ($attribute == '') {
+                $messageBag->add('attribute_modifier[]', 'required.');
+            }
+        }
+        return $messageBag;
     }
 } 

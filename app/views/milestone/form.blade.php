@@ -10,9 +10,9 @@
     {{ BootForm::checkbox('It awards an ability.', 'rewards_ability')->attribute('class', 'drawer-toggle') }}
     <div class="drawer-target">
         {{ BootForm::textarea('Ability Short Description', 'ability_short')->placeholder('Ability Short Description')->attribute('maxlength', 256)->attribute('rows', 3) }}
-        {{ BootForm::select('Targets', 'targets')->attribute('multiple', true)->options($targetOptions) }}
-        {{ BootForm::select('Ranges', 'ranges')->attribute('multiple', true)->options($rangeOptions) }}
-        {{ BootForm::select('Attunements', 'attunements')->attribute('multiple', true)->options($attunementOptions) }}
+        {{ BootForm::select('Targets', 'targets[]')->attribute('multiple', true)->options($targetOptions) }}
+        {{ BootForm::select('Ranges', 'ranges[]')->attribute('multiple', true)->options($rangeOptions) }}
+        {{ BootForm::select('Attunements', 'attunements[]')->attribute('multiple', true)->options($attunementOptions) }}
     </div>
 </div>
 

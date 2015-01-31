@@ -15,4 +15,8 @@ class Target extends Model implements PresenterInterface
     {
         return 'Ironquest\Presenters\TargetPresenter';
     }
+
+    public function target() {
+        return $this->belongsToMany('Ironquest\Target', 'ability_has_targets');
+    }
 }

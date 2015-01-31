@@ -10,20 +10,31 @@ use \App as App;
 use Ironquest\Services\EntityBase;
 use Ironquest\Validators\MilestoneValidator as validator;
 use Ironquest\Repos\MilestoneRepoInterface as repository;
+use Ironquest\Repos\AbilityRepoInterface as AbilityRepo;
+use Ironquest\Repos\TargetRepoInterface as TargetRepo;
+use Ironquest\Repos\RangeRepoInterface as RangeRepo;
+use Ironquest\Repos\AttunementRepoInterface as AttunementRepo;
+use Ironquest\Repos\AttributeModifierRepoInterface as AttributeModifierRepo;
 
 class Milestone extends EntityBase {
 
-    /**
-     * @param validator $validator
-     * @param repository $repository
-     */
     function __construct(
         validator $validator,
-        repository $repository
+        repository $repository,
+        AbilityRepo $abilityRepo,
+        TargetRepo $targetRepo,
+        RangeRepo $rangeRepo,
+        AttunementRepo $attunementRepo,
+        AttributeModifierRepo $attributeModifierRepo
     )
     {
         $this->validator = $validator;
         $this->repository = $repository;
+        $this->abilityRepo = $abilityRepo;
+        $this->targetRepo = $targetRepo;
+        $this->rangeRepo = $rangeRepo;
+        $this->attunementRepo = $attunementRepo;
+        $this->attributeModifierRepo = $this->attributeModifierRepo;
     }
 
     function getOptionData() {
@@ -43,15 +54,33 @@ class Milestone extends EntityBase {
      */
     public function create(array $data)
     {
-        $validator = $this->validator->make($data);
-        $errors = $this->validator->addAttributeValidationErrors($data, $validator);
-        if ($errors->count()) {
-            $this->setErrors($errors);
+        if (!$this->validator->validate($data)) {
+            $this->setErrors($this->validator->messages());
             return false;
         }
-
         try {
-            $this->repository->create($data);
+            $milestone = $this->repository->create(array(
+                'name' => $data['name'],
+                'short' => $data['short'],
+                'text' => $data['text'],
+            ));
+
+            if (!empty($data['rewards_ability'])) {
+                $ability = $this->abilityRepo->create(array(
+                    'short' => $data['ability_short']
+                ));
+                $milestone->ability()->save($ability);
+                foreach($data['targets'] as $target) {
+                    $target = $this->targetsRepo->create();
+                    $ability->targets()
+                }
+            }
+
+            $this->abilityRepo->create(array(
+                'name' => $data['name'],
+                'short' => $data['short'],
+                'text' => $data['text'],
+            ));
         } catch (Exception $e) {
             Session::flash('message', array('message' => $this->errorFlashMessage, 'context' => 'danger'));
             return false;
@@ -69,10 +98,8 @@ class Milestone extends EntityBase {
      */
     public function update(array $data)
     {
-        $validator = $this->validator->existing()->make($data);
-        $errors = $this->validator->addAttributeValidationErrors($data, $validator);
-        if ($errors->count()) {
-            $this->setErrors($errors);
+        if (!$this->validator->validate($data)) {
+            $this->setErrors($this->validator->messages());
             return false;
         }
 

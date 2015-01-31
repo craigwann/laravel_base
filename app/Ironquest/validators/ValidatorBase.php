@@ -7,6 +7,7 @@
  */
 
 use \Validator as Validator;
+use Illuminate\Support\MessageBag;
 
 abstract class ValidatorBase {
 
@@ -16,6 +17,12 @@ abstract class ValidatorBase {
      * @var array
      */
     protected $rules = array();
+
+    /**
+     * Validator errors
+     *
+     * @var \Illuminate\Support\MessageBag
+     */
     protected $messages = array();
 
     /**
@@ -34,6 +41,34 @@ abstract class ValidatorBase {
      */
     function existing() {
         return $this;
+    }
+
+    /**
+     * @param array $data
+     * @param array $rules
+     * @param array $messages
+     * @param array $customAttributes
+     *
+     * @return bool
+     */
+    function validate(array $data, $rules = array(), $messages = array(), array $customAttributes = array()) {
+        $validator = $this->make($data, $rules, $messages, $customAttributes);
+        $messages = $this->mergeMessageBags($validator->messages(), $this->manualValidation($data));
+        if ($messages->count()) {
+            $this->setMessages($messages);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Manual validation logic. Fired on validate and merged with validator messages.
+     *
+     * @param array $data
+     * @return \Illuminate\Support\MessageBag
+     */
+    function manualValidation(array $data) {
+        return new MessageBag();
     }
 
     /**
@@ -56,12 +91,19 @@ abstract class ValidatorBase {
     }
 
     /**
-     * Add a custom validation message.
+     * Set messages.
      *
-     * @param $rule
-     * @param $message
+     * @param \Illuminate\Support\MessageBag
      */
-    function addMessage($rule, $message) {
-        $this->messages[$rule] = $message;
+    function setMessages(MessageBag $bag) {
+        $this->messages = $bag;
+    }
+
+    function messages() {
+        return $this->messages;
+    }
+
+    function mergeMessageBags(MessageBag $bag, MessageBag $bag2) {
+        return new MessageBag(array_merge_recursive($bag->toArray(), $bag2->toArray()));
     }
 } 
