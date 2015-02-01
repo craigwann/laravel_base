@@ -1,5 +1,5 @@
 {{ BootForm::text('Name', 'milestone[name]')->placeholder('Name') }}
-{{ BootForm::textarea('Short Description', 'milestone[short')->placeholder('Short Description')->attribute('maxlength', 256)->attribute('rows', 3) }}
+{{ BootForm::textarea('Short Description', 'milestone[short]')->placeholder('Short Description')->attribute('maxlength', 256)->attribute('rows', 3) }}
 {{ BootForm::textarea('Full Text', 'milestone[text]')->placeholder('Full Text') }}
 
 <hr />
@@ -22,10 +22,10 @@
         <div class="clone-container">
             <div class="clone-target row">
                 <div class="col-sm-9">
-                    {{ BootForm::select('Attribute', 'attribute_modifier[][id]')->attribute('id', 'attribute')->options(array_merge(array('' => 'Choose Attribute...'), $attributeModifierOptions)) }}
+                    {{ BootForm::select('Attribute', 'attribute_modifier[id][]')->attribute('id', 'attribute')->options(array_merge(array('' => 'Choose Attribute...'), $attributeModifierOptions)) }}
                 </div>
                 <div class="col-sm-2 large-text">
-                    {{ BootForm::text('Attribute Modifier', 'attribute_modifier[][mod]')->attribute('id', 'attribute_modifier')->placeholder('Mod Num') }}
+                    {{ BootForm::text('Attribute Modifier', 'attribute_modifier[mod][]')->attribute('id', 'attribute_modifier')->placeholder('Mod Num') }}
                 </div>
                 <div class="col-sm-1 large-text">
                     <i class="fa fa-plus-circle clone"></i>

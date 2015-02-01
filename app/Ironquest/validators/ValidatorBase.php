@@ -53,7 +53,14 @@ abstract class ValidatorBase {
      */
     function validate(array $data, $rules = array(), $messages = array(), array $customAttributes = array()) {
         $validator = $this->make($data, $rules, $messages, $customAttributes);
-        $messages = $this->mergeMessageBags($validator->messages(), $this->manualValidation($data));
+
+        //Bootforms doesn't play nicely with array type validation dot notation
+        $validatorMessages = array();
+        foreach($validator->messages()->toArray() as $field => $message) {
+            $validatorMessages[str_replace('.', '[', $field) . ']'] = $message;
+        };
+
+        $messages = $this->mergeMessageBags(new MessageBag($validatorMessages), $this->manualValidation($data));
         if ($messages->count()) {
             $this->setMessages($messages);
             return false;

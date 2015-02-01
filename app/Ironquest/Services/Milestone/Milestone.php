@@ -44,6 +44,9 @@ class Milestone extends EntityBase {
             $this->setErrors($this->validator->messages());
             return false;
         }
+        $data['attribute_modifier'] = App::make('Ironquest\Services\AttributeModifier\AttirbuteModifier')->transformInput($data['attribute_modifier']);
+        var_dump($data);
+        exit;
         try {
             if (!empty($input['ability']) && count($input['ability'])) {
                 $milestone = Repo::build('ability')->createWithRelationships($input)->milestone();

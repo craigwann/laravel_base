@@ -1,6 +1,7 @@
 <?php namespace Ironquest\Controllers;
 
 use Ironquest\Services\Milestone\Milestone as Milestone;
+use Ironquest\Services\AttributeModifier\AttributeModifier;
 use \View as View;
 use \Input as Input;
 use \Config as Config;

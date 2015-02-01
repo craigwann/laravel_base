@@ -81,4 +81,16 @@ abstract class EntityBase extends ServiceBase {
         Session::flash('message', array('message' => ucfirst($this->name) . ' deleted!', 'context' => 'success'));
         return true;
     }
+
+    /**
+     * Overload calls to the repository.
+     *
+     * @param $name
+     * @param $arguments
+     * @return mixed
+     */
+    public function __call($name, $arguments)
+    {
+        return call_user_func_array(array($this->repository, $name), $arguments);
+    }
 }

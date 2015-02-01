@@ -17,13 +17,19 @@ class MilestoneValidator extends ValidatorBase {
      * @var array
      */
     protected $rules = array(
-        'milestone[name]' => 'required',
-        'milestone[short]' => 'required|max:256',
-        'milestone[text]' => 'required',
-        'ability[short]' => 'required_with:rewards_ability|max:256',
+        'milestone.name' => 'required',
+        'milestone.short' => 'required|max:256',
+        'milestone.text' => 'required',
+        'ability.short' => 'required_with:rewards_ability|max:256',
         'targets' => 'required_with:rewards_ability',
-        'ranges' => 'required_with:rewards_ability'
+        'ranges' => 'required_with:rewards_ability',
+        'attribute_modifier[]id' => 'required_with:rewards_attribute',
+        'attribute_modifier[]mod' => 'required_with:rewards_attribute|numeric'
      );
+
+    protected $messges = array(
+        'milestone.name.required' => 'test'
+    );
 
 
     /**
@@ -34,18 +40,17 @@ class MilestoneValidator extends ValidatorBase {
      */
     function manualValidation(array $input) {
         $messageBag = new MessageBag();
-        if (empty($input['rewards_attribute'])) return $messageBag;
+        if ((empty($input['rewards_ability'])) || !count($input['attribute_modifier'])) return $messageBag;
 
-        foreach($input['attribute'] as $attribute) {
-            if ($attribute == '') {
-                $messageBag->add('attribute[]', 'required.');
+        foreach($input['attribute_modifier'] as $attribute_modifier) {
+            if ($attribute_modifier['id'] == '') {
+                $messageBag->add('attribute_modifier[]id', 'required.');
             }
-        }
-        foreach($input['attribute_modifier'] as $attribute) {
-            if ($attribute == '') {
-                $messageBag->add('attribute_modifier[]', 'required.');
+            if ($attribute_modifier['mod'] == '') {
+                $messageBag->add('attribute_modifier[]mod', 'required.');
             }
         }
         return $messageBag;
     }
+
 } 
