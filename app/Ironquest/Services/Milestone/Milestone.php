@@ -8,33 +8,19 @@
 
 use \App as App;
 use Ironquest\Services\EntityBase;
+use Ironquest\Repos\Repo as Repo;
 use Ironquest\Validators\MilestoneValidator as validator;
 use Ironquest\Repos\MilestoneRepoInterface as repository;
-use Ironquest\Repos\AbilityRepoInterface as AbilityRepo;
-use Ironquest\Repos\TargetRepoInterface as TargetRepo;
-use Ironquest\Repos\RangeRepoInterface as RangeRepo;
-use Ironquest\Repos\AttunementRepoInterface as AttunementRepo;
-use Ironquest\Repos\AttributeModifierRepoInterface as AttributeModifierRepo;
 
 class Milestone extends EntityBase {
 
     function __construct(
         validator $validator,
-        repository $repository,
-        AbilityRepo $abilityRepo,
-        TargetRepo $targetRepo,
-        RangeRepo $rangeRepo,
-        AttunementRepo $attunementRepo,
-        AttributeModifierRepo $attributeModifierRepo
+        repository $repository
     )
     {
         $this->validator = $validator;
         $this->repository = $repository;
-        $this->abilityRepo = $abilityRepo;
-        $this->targetRepo = $targetRepo;
-        $this->rangeRepo = $rangeRepo;
-        $this->attunementRepo = $attunementRepo;
-        $this->attributeModifierRepo = $this->attributeModifierRepo;
     }
 
     function getOptionData() {
@@ -59,28 +45,12 @@ class Milestone extends EntityBase {
             return false;
         }
         try {
-            $milestone = $this->repository->create(array(
-                'name' => $data['name'],
-                'short' => $data['short'],
-                'text' => $data['text'],
-            ));
-
-            if (!empty($data['rewards_ability'])) {
-                $ability = $this->abilityRepo->create(array(
-                    'short' => $data['ability_short']
-                ));
-                $milestone->ability()->save($ability);
-                foreach($data['targets'] as $target) {
-                    $target = $this->targetsRepo->create();
-                    $ability->targets()
-                }
+            if (!empty($input['ability']) && count($input['ability'])) {
+                $milestone = Repo::build('ability')->createWithRelationships($input)->milestone();
+            } else {
+                $milestone = $this->repository->create($data['milestone']);
             }
 
-            $this->abilityRepo->create(array(
-                'name' => $data['name'],
-                'short' => $data['short'],
-                'text' => $data['text'],
-            ));
         } catch (Exception $e) {
             Session::flash('message', array('message' => $this->errorFlashMessage, 'context' => 'danger'));
             return false;

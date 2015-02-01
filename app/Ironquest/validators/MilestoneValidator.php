@@ -17,10 +17,10 @@ class MilestoneValidator extends ValidatorBase {
      * @var array
      */
     protected $rules = array(
-        'name' => 'required',
-        'short' => 'required|max:256',
-        'text' => 'required',
-        'ability_short' => 'required_with:rewards_ability|max:256',
+        'milestone[name]' => 'required',
+        'milestone[short]' => 'required|max:256',
+        'milestone[text]' => 'required',
+        'ability[short]' => 'required_with:rewards_ability|max:256',
         'targets' => 'required_with:rewards_ability',
         'ranges' => 'required_with:rewards_ability'
      );
